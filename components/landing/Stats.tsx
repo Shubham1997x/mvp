@@ -136,15 +136,17 @@ export const Stats = () => {
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{
-                  delay: index * 0.1,
-                  duration: 0.5,
-                  ease: "easeOut",
-                }}
                 whileHover={{ y: -5 }}
                 transition={{
                   opacity: { duration: 0.5, delay: index * 0.1, ease: "easeOut" },
-                  y: { duration: 0.5, delay: index * 0.1, ease: "easeOut" },
+                  y: { 
+                    duration: 0.5, 
+                    delay: index * 0.1, 
+                    ease: "easeOut",
+                    type: "spring",
+                    stiffness: 400,
+                    damping: 25
+                  },
                   default: { type: "spring", stiffness: 400, damping: 25 }
                 }}
                 className="group relative p-6 sm:p-8 rounded-xl bg-white shadow-md hover:shadow-lg border border-gray-200/50 hover:border-primary-cta/30 will-change-transform"

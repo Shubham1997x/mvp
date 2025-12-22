@@ -135,13 +135,13 @@ export function Showcase() {
             },
             {
               step: "02",
-              title: "Business & Productivity",
-              description: "Task management dashboards, CRM systems, appointment booking, invoice tracking, team collaboration tools. Streamline your business operations with custom-built solutions.",
+              title: "PrimeBid - Solar Panel Installation",
+              description: "A comprehensive platform for solar panel installation services. Quote management, project tracking, customer onboarding, and installation scheduling. Streamline your solar installation business with custom-built solutions.",
               features: [
-                "Task & project management",
-                "CRM & lead tracking",
-                "Appointment scheduling",
-                "Team collaboration tools",
+                "Quote & estimate management",
+                "Project tracking & scheduling",
+                "Customer onboarding system",
+                "Installation workflow tools",
               ],
             },
             {
@@ -210,7 +210,7 @@ export function Showcase() {
                       index === 0
                         ? "/images/cinema.png"
                         : index === 1
-                          ? "https://images.unsplash.com/photo-1497215842964-222b430dc094?w=800&h=600&fit=crop&auto=format"
+                          ? "/images/primebid.png"
                           : "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=600&fit=crop&auto=format"
                     }
                     alt={feature.title}

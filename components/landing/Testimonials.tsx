@@ -110,15 +110,22 @@ export const Testimonials = () => {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{
-                delay: index * 0.1,
-                duration: 0.5,
-                ease: "easeOut",
-              }}
               whileHover={{ y: -8, scale: 1.02 }}
               transition={{
                 opacity: { duration: 0.5, delay: index * 0.1, ease: "easeOut" },
-                y: { duration: 0.5, delay: index * 0.1, ease: "easeOut" },
+                y: { 
+                  duration: 0.5, 
+                  delay: index * 0.1, 
+                  ease: "easeOut",
+                  type: "spring",
+                  stiffness: 400,
+                  damping: 25
+                },
+                scale: {
+                  type: "spring",
+                  stiffness: 400,
+                  damping: 25
+                },
                 default: { type: "spring", stiffness: 400, damping: 25 }
               }}
             >

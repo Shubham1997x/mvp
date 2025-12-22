@@ -222,10 +222,10 @@ export const Features = () => {
                           y: iconAnimation.animate.y ?? 0
                         }}
                         transition={{
-                          ...iconAnimation.transition,
                           type: "spring",
                           stiffness: 400,
-                          damping: 25
+                          damping: 25,
+                          duration: 0.3
                         }}
                         style={{ willChange: "transform" }}
                       >

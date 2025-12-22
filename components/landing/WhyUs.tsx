@@ -74,11 +74,17 @@ export function WhyUs() {
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
                 whileHover={{ y: -8 }}
                 transition={{
                   opacity: { duration: 0.6, delay: index * 0.1, ease: "easeOut" },
-                  y: { duration: 0.6, delay: index * 0.1, ease: "easeOut" },
+                  y: { 
+                    duration: 0.6, 
+                    delay: index * 0.1, 
+                    ease: "easeOut",
+                    type: "spring",
+                    stiffness: 400,
+                    damping: 25
+                  },
                   default: { type: "spring", stiffness: 400, damping: 25 }
                 }}
                 className={`relative rounded-2xl p-8 border-2 h-full flex flex-col will-change-transform ${
