@@ -1,9 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { ArrowRight, ChevronDown, Lightbulb, Code, Rocket, CheckCircle } from "lucide-react";
+import { ArrowRight, ChevronDown } from "lucide-react";
 import { motion } from "framer-motion";
-import { siteConfig } from "@/config/siteConfig";
 
 // Using local logo files from public/images directory (l1 through l4)
 const companies = Array.from({ length: 4 }, (_, i) => ({
@@ -166,12 +165,13 @@ export function Hero() {
                       <>
                         {/* Infographic Section */}
                         <motion.div
-                          className={`relative h-32 rounded-l-lg overflow-hidden flex items-center justify-center ${item.type === "rocket" ? "bg-black" : `bg-linear-to-br ${item.gradient}`
-                            }`}
+                          className={`relative h-32 rounded-l-lg overflow-hidden flex items-center justify-center ${
+                            (item.type as "wireframe" | "code" | "rocket") === "rocket" ? "bg-black" : `bg-linear-to-br ${item.gradient}`
+                          }`}
                           whileHover={{ scale: 1.05 }}
                           transition={{ duration: 0.3 }}
                         >
-                          {item.type === "wireframe" && (
+                          {(item.type as "wireframe" | "code" | "rocket") === "wireframe" && (
                             <div className="w-full h-full relative">
                               {/* Wireframe Grid */}
                               <div className="grid grid-cols-3 gap-2 h-full p-2">
@@ -194,7 +194,7 @@ export function Hero() {
                               </div>
                             </div>
                           )}
-                          {item.type === "code" && (
+                          {(item.type as "wireframe" | "code" | "rocket") === "code" && (
                             <div className="w-full h-full relative font-mono text-xs">
                               {/* Code Editor Interface */}
                               <div className="bg-gray-900/90 rounded-lg h-full overflow-hidden p-2">
@@ -228,7 +228,7 @@ export function Hero() {
                               </div>
                             </div>
                           )}
-                          {item.type === "rocket" && (
+                          {(item.type as "wireframe" | "code" | "rocket") === "rocket" && (
                             <div className="w-full h-full relative flex items-center justify-center bg-black">
                               {/* Stars background */}
                               {starPositions.map((star, i) => (
@@ -510,12 +510,13 @@ export function Hero() {
                         </div>
                         {/* Infographic Section */}
                         <motion.div
-                          className={`relative h-32 rounded-r-lg overflow-hidden flex items-center justify-center ${item.type === "rocket" ? "bg-black" : `bg-gradient-to-br ${item.gradient}`
-                            }`}
+                          className={`relative h-32 rounded-r-lg overflow-hidden flex items-center justify-center ${
+                            (item.type as "wireframe" | "code" | "rocket") === "rocket" ? "bg-black" : `bg-linear-to-br ${item.gradient}`
+                          }`}
                           whileHover={{ scale: 1.05 }}
                           transition={{ duration: 0.3 }}
                         >
-                          {item.type === "wireframe" && (
+                          {(item.type as "wireframe" | "code" | "rocket") === "wireframe" && (
                             <div className="w-full h-full relative">
                               {/* Wireframe Grid */}
                               <div className="grid grid-cols-3 gap-2 h-full p-2">
@@ -538,7 +539,7 @@ export function Hero() {
                               </div>
                             </div>
                           )}
-                          {item.type === "code" && (
+                          {(item.type as "wireframe" | "code" | "rocket") === "code" && (
                             <div className="w-full h-full relative font-mono text-xs">
                               {/* Code Editor Interface */}
                               <div className="bg-gray-900/90 rounded-lg h-full p-3 overflow-hidden">
@@ -573,7 +574,7 @@ export function Hero() {
                       </div>
                     </div>
                           )}
-                          {item.type === "rocket" && (
+                          {(item.type as "wireframe" | "code" | "rocket") === "rocket" && (
                             <div className="w-full h-full relative flex items-center justify-center bg-black">
                               {/* Stars background */}
                               {starPositionsRight.map((star, i) => (

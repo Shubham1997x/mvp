@@ -2,7 +2,6 @@ import { Navbar } from "@/components/landing/Navbar";
 import { Hero } from "@/components/landing/Hero";
 import { Showcase } from "@/components/landing/Showcase";
 import { HowItWorks } from "@/components/landing/HowItWorks";
-import { LivePreview } from "@/components/landing/LivePreview";
 import { FinalCTA } from "@/components/landing/FinalCTA";
 import { Features } from "@/components/landing/Features";
 import { WhyUs } from "@/components/landing/WhyUs";

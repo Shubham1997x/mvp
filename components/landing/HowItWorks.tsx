@@ -76,7 +76,7 @@ export function HowItWorks() {
                 className="relative bg-white rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300 border border-gray-100 overflow-hidden flex flex-col h-full w-full"
               >
                 {/* Infographic Section - 70% (Top) */}
-                <div className="relative bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center p-8 h-[350px] w-full">
+                <div className="relative bg-linear-to-br from-gray-50 to-gray-100 flex items-center justify-center p-8 h-[350px] w-full">
                   {index === 0 && (
                     <div className="w-full h-full relative flex items-center justify-center">
                       {/* AI Discovery Infographic */}
