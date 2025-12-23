@@ -76,7 +76,7 @@ export function HowItWorks() {
                 className="relative bg-white rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300 border border-gray-100 overflow-hidden flex flex-col h-full w-full"
               >
                 {/* Infographic Section - 70% (Top) */}
-                <div className="relative bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center p-8 flex-[7] h-[350px]">
+                <div className="relative bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center p-8 h-[350px] w-full">
                   {index === 0 && (
                     <div className="w-full h-full relative flex items-center justify-center">
                       {/* AI Discovery Infographic */}
@@ -186,7 +186,7 @@ export function HowItWorks() {
                   )}
 
                   {index === 1 && (
-                    <div className="w-full h-full relative flex flex-col">
+                    <div className="w-full h-full relative flex items-center justify-center">
                       {/* Development Infographic */}
                       <div className="relative w-full h-full flex flex-col items-center justify-center gap-4">
                         {/* Code Editor */}
@@ -364,7 +364,7 @@ export function HowItWorks() {
                 </div>
 
                 {/* Text Section - 30% (Bottom) */}
-                <div className="p-6 flex flex-col justify-center flex-[3]">
+                <div className="p-6 flex flex-col justify-center w-full min-h-[150px]">
                   <div className="text-4xl lg:text-5xl text-primary-cta/20 font-bold mb-2">
                     {index + 1}
                   </div>
