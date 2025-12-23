@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
 
 export function HowItWorks() {
   const steps = [
@@ -29,14 +28,14 @@ export function HowItWorks() {
           className="text-center max-w-3xl mx-auto mb-16"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: true, margin: "100px", amount: 0.3 }}
           transition={{ duration: 0.6 }}
         >
           <motion.div
             className="inline-block px-4 py-2 bg-primary-cta/10 text-primary-cta rounded-full mb-4"
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, margin: "100px", amount: 0.3 }}
             transition={{ duration: 0.4, delay: 0.1 }}
           >
             Our Process
@@ -45,7 +44,7 @@ export function HowItWorks() {
             className="text-4xl lg:text-5xl text-black mb-4 font-normal"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, margin: "100px", amount: 0.3 }}
             transition={{ duration: 0.6, delay: 0.1 }}
           >
             How We Turn Ideas Into Reality
@@ -54,71 +53,343 @@ export function HowItWorks() {
             className="text-lg text-gray-700 leading-relaxed"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, margin: "100px", amount: 0.3 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
             The World's First AI-Powered Rapid Prototyping Lab
           </motion.p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr_auto_1fr] gap-4 md:gap-8 lg:gap-12 max-w-6xl mx-auto items-stretch">
-          {steps.flatMap((step, index) => [
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto items-stretch">
+          {steps.map((step, index) => (
             <motion.div
               key={`step-${index}`}
-              className="relative z-10 flex"
+              className="relative z-10 flex h-full"
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
+              viewport={{ once: true, margin: "100px", amount: 0.3 }}
               transition={{ duration: 0.6, delay: index * 0.15 }}
             >
               <motion.div
-                whileHover={{ y: -8 }}
+                whileHover={{ y: -4 }}
                 transition={{ type: "spring", stiffness: 400, damping: 25 }}
-                className="relative bg-white rounded-2xl p-8 shadow-md hover:shadow-xl transition-shadow duration-300 border border-gray-100 w-full h-full flex flex-col min-h-[400px] will-change-transform"
+                className="relative bg-white rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300 border border-gray-100 overflow-hidden flex flex-col h-full w-full"
               >
-                <div className="flex-1">
-                  <div className="text-5xl lg:text-6xl text-primary-cta/20 font-bold mb-4">
+                {/* Infographic Section - 70% (Top) */}
+                <div className="relative bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center p-8 flex-[7] h-[350px]">
+                  {index === 0 && (
+                    <div className="w-full h-full relative flex items-center justify-center">
+                      {/* AI Discovery Infographic */}
+                      <div className="relative w-full h-full flex items-center justify-center">
+                        {/* AI Brain/Network */}
+                        <motion.div
+                          className="flex items-center justify-center"
+                          initial={{ opacity: 0, scale: 0.8 }}
+                          whileInView={{ opacity: 1, scale: 1 }}
+                          viewport={{ once: true, margin: "50px", amount: 0.3 }}
+                          transition={{ duration: 0.6 }}
+                        >
+                          <svg width="180" height="180" viewBox="0 0 200 200" className="text-primary-cta" style={{ maxWidth: "100%", height: "auto" }}>
+                            {/* Neural Network Nodes */}
+                            {[...Array(9)].map((_, i) => {
+                              const angle = (i * 40) * (Math.PI / 180);
+                              const radius = 60;
+                              const x = 100 + radius * Math.cos(angle);
+                              const y = 100 + radius * Math.sin(angle);
+                              return (
+                                <motion.circle
+                                  key={i}
+                                  cx={x}
+                                  cy={y}
+                                  r="8"
+                                  fill="currentColor"
+                                  initial={{ opacity: 0, scale: 0 }}
+                                  whileInView={{ opacity: 1, scale: 1 }}
+                                  viewport={{ once: true, margin: "50px", amount: 0.3 }}
+                                  transition={{ delay: i * 0.1, duration: 0.3 }}
+                                />
+                              );
+                            })}
+                            {/* Center Node */}
+                            <motion.circle
+                              cx="100"
+                              cy="100"
+                              r="12"
+                              fill="currentColor"
+                              initial={{ opacity: 0, scale: 0 }}
+                              whileInView={{ opacity: 1, scale: 1 }}
+                              viewport={{ once: true, margin: "50px", amount: 0.3 }}
+                              transition={{ delay: 0.5, duration: 0.3 }}
+                            />
+                            {/* Connection Lines */}
+                            {[...Array(9)].map((_, i) => {
+                              const angle = (i * 40) * (Math.PI / 180);
+                              const radius = 60;
+                              const x = 100 + radius * Math.cos(angle);
+                              const y = 100 + radius * Math.sin(angle);
+                              return (
+                                <motion.line
+                                  key={`line-${i}`}
+                                  x1="100"
+                                  y1="100"
+                                  x2={x}
+                                  y2={y}
+                                  stroke="currentColor"
+                                  strokeWidth="2"
+                                  opacity="0.3"
+                                  initial={{ pathLength: 0 }}
+                                  whileInView={{ pathLength: 1 }}
+                                  viewport={{ once: true, margin: "50px", amount: 0.3 }}
+                                  transition={{ delay: 0.6 + i * 0.05, duration: 0.4 }}
+                                />
+                              );
+                            })}
+                          </svg>
+                        </motion.div>
+                        {/* Call Interface */}
+                        <motion.div
+                          className="absolute bottom-4 left-4 bg-white rounded-lg shadow-md p-3"
+                          initial={{ opacity: 0, x: -20 }}
+                          whileInView={{ opacity: 1, x: 0 }}
+                          viewport={{ once: true, margin: "50px", amount: 0.3 }}
+                          transition={{ delay: 0.8, duration: 0.5 }}
+                        >
+                          <div className="flex items-center gap-2">
+                            <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                            <span className="text-xs text-gray-600">Call Active</span>
+                          </div>
+                        </motion.div>
+                        {/* Notes Animation */}
+                        <motion.div
+                          className="absolute top-4 right-4 bg-white rounded-lg shadow-md p-2"
+                          initial={{ opacity: 0, y: -20 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          viewport={{ once: true, margin: "50px", amount: 0.3 }}
+                          transition={{ delay: 1, duration: 0.5 }}
+                        >
+                          <div className="space-y-1">
+                            {[...Array(3)].map((_, i) => (
+                              <motion.div
+                                key={i}
+                                className="h-1 bg-gray-300 rounded"
+                                style={{ width: `${60 + i * 10}px` }}
+                                initial={{ width: 0 }}
+                                whileInView={{ width: `${60 + i * 10}px` }}
+                                viewport={{ once: true, margin: "50px", amount: 0.3 }}
+                                transition={{ delay: 1.2 + i * 0.2, duration: 0.4 }}
+                              />
+                            ))}
+                          </div>
+                        </motion.div>
+                      </div>
+                    </div>
+                  )}
+
+                  {index === 1 && (
+                    <div className="w-full h-full relative flex flex-col">
+                      {/* Development Infographic */}
+                      <div className="relative w-full h-full flex flex-col items-center justify-center gap-4">
+                        {/* Code Editor */}
+                        <motion.div
+                          className="w-full max-w-xs bg-gray-900 rounded-lg p-4 font-mono text-xs"
+                          initial={{ opacity: 0, scale: 0.9 }}
+                          whileInView={{ opacity: 1, scale: 1 }}
+                          viewport={{ once: true, margin: "50px", amount: 0.3 }}
+                          transition={{ duration: 0.6 }}
+                        >
+                          <div className="flex gap-1 mb-2">
+                            <div className="w-2 h-2 rounded-full bg-red-400"></div>
+                            <div className="w-2 h-2 rounded-full bg-yellow-400"></div>
+                            <div className="w-2 h-2 rounded-full bg-green-400"></div>
+                          </div>
+                          <div className="space-y-1">
+                            {[
+                              { width: "60%", color: "bg-purple-400" },
+                              { width: "80%", color: "bg-pink-400" },
+                              { width: "45%", color: "bg-blue-400" },
+                              { width: "70%", color: "bg-purple-300" },
+                            ].map((line, i) => (
+                              <motion.div
+                                key={i}
+                                className={`h-2 ${line.color} rounded`}
+                                style={{ width: line.width }}
+                                initial={{ width: 0 }}
+                                whileInView={{ width: line.width }}
+                                viewport={{ once: true, margin: "50px", amount: 0.3 }}
+                                transition={{ delay: 0.5 + i * 0.2, duration: 0.5 }}
+                              />
+                            ))}
+                          </div>
+                        </motion.div>
+                        {/* Progress Bars */}
+                        <motion.div
+                          className="w-full max-w-xs space-y-2"
+                          initial={{ opacity: 0, y: 20 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          viewport={{ once: true, margin: "50px", amount: 0.3 }}
+                          transition={{ delay: 1, duration: 0.5 }}
+                        >
+                          {["Design", "Development", "Testing"].map((label, i) => (
+                            <div key={label} className="bg-white rounded p-2 shadow-sm">
+                              <div className="text-xs text-gray-600 mb-1">{label}</div>
+                              <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
+                                <motion.div
+                                  className="h-full bg-primary-cta rounded-full"
+                                  initial={{ width: 0 }}
+                                  whileInView={{ width: `${30 + i * 30}%` }}
+                                  viewport={{ once: true, margin: "50px", amount: 0.3 }}
+                                  transition={{ delay: 1.2 + i * 0.2, duration: 0.6 }}
+                                />
+                              </div>
+                            </div>
+                          ))}
+                        </motion.div>
+                      </div>
+                    </div>
+                  )}
+
+                  {index === 2 && (
+                    <div className="w-full h-full relative flex items-center justify-center">
+                      {/* Deployment Infographic */}
+                      <div className="relative w-full h-full flex items-center justify-center">
+                        {/* Deployment Process */}
+                        <motion.div
+                          className="flex items-center justify-center relative"
+                          initial={{ opacity: 0 }}
+                          whileInView={{ opacity: 1 }}
+                          viewport={{ once: true, margin: "50px", amount: 0.3 }}
+                          transition={{ duration: 0.6 }}
+                        >
+                          <svg width="180" height="180" viewBox="0 0 200 200" className="text-primary-cta" style={{ maxWidth: "100%", height: "auto" }}>
+                            {/* Server/Cloud */}
+                            <motion.rect
+                              x="50"
+                              y="80"
+                              width="100"
+                              height="60"
+                              rx="8"
+                              fill="currentColor"
+                              opacity="0.2"
+                              initial={{ opacity: 0 }}
+                              whileInView={{ opacity: 0.2 }}
+                              viewport={{ once: true, margin: "50px", amount: 0.3 }}
+                              transition={{ delay: 0.3, duration: 0.4 }}
+                            />
+                            <motion.rect
+                              x="60"
+                              y="90"
+                              width="20"
+                              height="15"
+                              rx="2"
+                              fill="currentColor"
+                              initial={{ opacity: 0 }}
+                              whileInView={{ opacity: 1 }}
+                              viewport={{ once: true, margin: "50px", amount: 0.3 }}
+                              transition={{ delay: 0.5, duration: 0.3 }}
+                            />
+                            <motion.rect
+                              x="90"
+                              y="90"
+                              width="20"
+                              height="15"
+                              rx="2"
+                              fill="currentColor"
+                              initial={{ opacity: 0 }}
+                              whileInView={{ opacity: 1 }}
+                              viewport={{ once: true, margin: "50px", amount: 0.3 }}
+                              transition={{ delay: 0.7, duration: 0.3 }}
+                            />
+                            <motion.rect
+                              x="120"
+                              y="90"
+                              width="20"
+                              height="15"
+                              rx="2"
+                              fill="currentColor"
+                              initial={{ opacity: 0 }}
+                              whileInView={{ opacity: 1 }}
+                              viewport={{ once: true, margin: "50px", amount: 0.3 }}
+                              transition={{ delay: 0.9, duration: 0.3 }}
+                            />
+                            {/* Upload Arrow */}
+                            <motion.path
+                              d="M100 40 L100 70 M90 60 L100 70 L110 60"
+                              stroke="currentColor"
+                              strokeWidth="3"
+                              fill="none"
+                              strokeLinecap="round"
+                              initial={{ pathLength: 0, opacity: 0 }}
+                              whileInView={{ pathLength: 1, opacity: 1 }}
+                              viewport={{ once: true, margin: "50px", amount: 0.3 }}
+                              transition={{ delay: 1.1, duration: 0.5 }}
+                            />
+                            {/* Checkmark */}
+                            <motion.circle
+                              cx="100"
+                              cy="160"
+                              r="15"
+                              fill="currentColor"
+                              initial={{ scale: 0, opacity: 0 }}
+                              whileInView={{ scale: 1, opacity: 1 }}
+                              viewport={{ once: true, margin: "50px", amount: 0.3 }}
+                              transition={{ delay: 1.5, duration: 0.3, type: "spring" }}
+                            />
+                            <motion.path
+                              d="M95 160 L98 163 L105 156"
+                              stroke="white"
+                              strokeWidth="2"
+                              fill="none"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              initial={{ pathLength: 0 }}
+                              whileInView={{ pathLength: 1 }}
+                              viewport={{ once: true, margin: "50px", amount: 0.3 }}
+                              transition={{ delay: 1.7, duration: 0.3 }}
+                            />
+                          </svg>
+                        </motion.div>
+                        {/* Success Badge */}
+                        <motion.div
+                          className="absolute top-2 right-2 bg-green-500 text-white rounded-full px-3 py-1 text-xs font-semibold"
+                          initial={{ opacity: 0, scale: 0 }}
+                          whileInView={{ opacity: 1, scale: 1 }}
+                          viewport={{ once: true, margin: "50px", amount: 0.3 }}
+                          transition={{ delay: 1.8, duration: 0.3, type: "spring" }}
+                        >
+                          Live
+                        </motion.div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                {/* Text Section - 30% (Bottom) */}
+                <div className="p-6 flex flex-col justify-center flex-[3]">
+                  <div className="text-4xl lg:text-5xl text-primary-cta/20 font-bold mb-2">
                     {index + 1}
                   </div>
-                  <h3 className="text-2xl lg:text-3xl text-gray-900 mb-2 font-normal leading-tight">
+                  <h3 className="text-xl lg:text-2xl text-gray-900 mb-1 font-normal leading-tight">
                     {step.title}
                   </h3>
                   {step.subtitle && (
-                    <p className="text-sm text-primary-cta font-medium mb-4">
+                    <p className="text-sm text-primary-cta font-medium mb-2">
                       {step.subtitle}
                     </p>
                   )}
-                  <ul className="text-base text-gray-700 leading-relaxed space-y-2">
-                    {step.description.split('. ').filter(item => item.trim()).map((item, idx) => (
-                      <li key={idx} className="flex items-start gap-2">
-                        <span className="text-primary-cta mt-1">•</span>
-                        <span>{item.trim()}</span>
-                      </li>
-                    ))}
-                  </ul>
+                  <p className="text-sm text-gray-600 leading-relaxed">
+                    {step.description.split('. ')[0]}.
+                  </p>
                 </div>
               </motion.div>
-            </motion.div>,
-            index < steps.length - 1 && (
-              <motion.div
-                key={`arrow-${index}`}
-                className="hidden md:flex w-10 h-10 items-center justify-center z-20 bg-white rounded-full shadow-md border border-gray-200 shrink-0 self-center"
-                initial={{ opacity: 0, x: -10 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.15 + 0.3 }}
-              >
-                <ArrowRight className="w-5 h-5 text-primary-cta" />
               </motion.div>
-            )
-          ]).filter(Boolean)}
+          ))}
         </div>
 
         <motion.div
           className="text-center mt-16"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "100px", amount: 0.3 }}
           transition={{ duration: 0.6, delay: 0.5 }}
         >
             <motion.button

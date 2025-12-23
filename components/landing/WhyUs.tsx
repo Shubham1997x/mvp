@@ -64,9 +64,11 @@ export function WhyUs() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 items-stretch">
           {Object.entries(comparison).map(([key, data], index) => {
             const isOurSolution = key === "ourSolution";
+            const isTraditional = key === "traditional";
+            const isDiy = key === "diy";
             const TitleIcon = data.icon;
             return (
               <motion.div
@@ -74,84 +76,144 @@ export function WhyUs() {
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                whileHover={{ y: -8 }}
-                transition={{
-                  opacity: { duration: 0.6, delay: index * 0.1, ease: "easeOut" },
-                  y: { 
-                    duration: 0.6, 
-                    delay: index * 0.1, 
-                    ease: "easeOut",
-                    type: "spring",
-                    stiffness: 400,
-                    damping: 25
-                  },
-                  default: { type: "spring", stiffness: 400, damping: 25 }
+                whileHover={{ 
+                  y: -8,
+                  scale: 1.01
                 }}
-                className={`relative rounded-2xl p-8 border-2 h-full flex flex-col will-change-transform ${
+                transition={{
+                  type: "spring",
+                  stiffness: 300,
+                  damping: 30
+                }}
+                className={`relative rounded-3xl h-full flex flex-col overflow-hidden will-change-transform ${
                   isOurSolution
-                    ? "border-primary-cta bg-gradient-to-br from-primary-cta/10 to-primary-cta/5 shadow-xl md:scale-105 md:-mt-4"
-                    : "border-gray-200 bg-white hover:border-gray-300 hover:shadow-lg transition-shadow duration-300"
+                    ? "bg-gradient-to-br from-primary-cta via-primary-cta/95 to-primary-cta/90 text-white shadow-2xl border-2 border-primary-cta/50"
+                    : isTraditional
+                    ? "bg-white border border-gray-200/60 hover:border-gray-300 hover:shadow-xl"
+                    : "bg-gradient-to-br from-gray-50 to-white border border-gray-200/60 hover:border-gray-300 hover:shadow-xl"
                 }`}
               >
-                {/* Icon Badge */}
-                <div className={`mb-6 inline-flex items-center justify-center w-14 h-14 rounded-xl ${
-                  isOurSolution 
-                    ? "bg-primary-cta/20" 
-                    : "bg-gray-100"
+                {/* Background Pattern for Our Solution */}
+                {isOurSolution && (
+                  <div className="absolute inset-0 opacity-10">
+                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.3),transparent_50%)]" />
+                    <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl" />
+                    <div className="absolute bottom-0 left-0 w-48 h-48 bg-white/10 rounded-full blur-2xl" />
+                  </div>
+                )}
+
+                {/* Combined Section */}
+                <div className={`relative z-10 p-8 pb-8 flex-1 ${
+                  isOurSolution ? "bg-gradient-to-r from-white/10 to-transparent" : ""
                 }`}>
-                  <TitleIcon className={`w-7 h-7 ${
-                    isOurSolution ? "text-primary-cta" : "text-gray-600"
-                  }`} />
+                  <div className="flex items-start justify-between mb-6">
+                    <div className={`inline-flex items-center justify-center w-16 h-16 rounded-2xl ${
+                      isOurSolution 
+                        ? "bg-white/20 backdrop-blur-sm shadow-lg" 
+                        : isTraditional
+                        ? "bg-gradient-to-br from-red-50 to-red-100/50"
+                        : "bg-gradient-to-br from-orange-50 to-orange-100/50"
+                    }`}>
+                      <TitleIcon className={`w-8 h-8 ${
+                        isOurSolution 
+                          ? "text-white" 
+                          : isTraditional
+                          ? "text-red-600"
+                          : "text-orange-600"
+                      }`} />
+                    </div>
+                    
+                    {isOurSolution && (
+                      <div className="px-3 py-1.5 bg-white/20 backdrop-blur-sm rounded-full border border-white/30">
+                        <span className="text-xs font-semibold text-white">RECOMMENDED</span>
+                      </div>
+                    )}
+                    
+                    {(isTraditional || isDiy) && (
+                      <div className={`px-3 py-1.5 rounded-full ${
+                        isTraditional
+                          ? "bg-red-50 border border-red-200"
+                          : "bg-orange-50 border border-orange-200"
+                      }`}>
+                        <span className={`text-xs font-semibold ${
+                          isTraditional ? "text-red-600" : "text-orange-600"
+                        }`}>
+                          {isTraditional ? "EXPENSIVE" : "COMPLEX"}
+                        </span>
+                      </div>
+                    )}
+                  </div>
+
+                  <h3
+                    className={`text-2xl font-bold mb-8 ${
+                      isOurSolution 
+                        ? "text-white" 
+                        : isTraditional
+                        ? "text-gray-900"
+                        : "text-gray-900"
+                    }`}
+                  >
+                    {data.title}
+                  </h3>
+
+                  <ul className="space-y-5">
+                    {data.items.map((item, idx) => {
+                      const ItemIcon = item.icon;
+                      const isPositive = item.icon === Check || item.icon === Rocket || item.icon === Award || item.icon === TrendingUp;
+                      return (
+                        <motion.li
+                          key={idx}
+                          initial={{ opacity: 0, x: -20 }}
+                          whileInView={{ opacity: 1, x: 0 }}
+                          viewport={{ once: true }}
+                          transition={{ 
+                            delay: 0.2 + idx * 0.1,
+                            type: "spring",
+                            stiffness: 300,
+                            damping: 25
+                          }}
+                          className="flex items-start gap-4 group"
+                        >
+                          <div className={`shrink-0 w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-300 ${
+                            isOurSolution
+                              ? "bg-white/20 backdrop-blur-sm text-white group-hover:bg-white/30 group-hover:scale-110"
+                              : isPositive
+                              ? "bg-primary-cta/10 text-primary-cta group-hover:bg-primary-cta/20 group-hover:scale-110"
+                              : isTraditional
+                              ? "bg-red-50 text-red-600 group-hover:bg-red-100 group-hover:scale-110"
+                              : "bg-orange-50 text-orange-600 group-hover:bg-orange-100 group-hover:scale-110"
+                          }`}>
+                            {isPositive ? (
+                              <Check className="w-5 h-5" />
+                            ) : (
+                              <X className="w-5 h-5" />
+                            )}
+                          </div>
+                          <span
+                            className={`text-base leading-relaxed pt-2 ${
+                              isOurSolution 
+                                ? "text-white/95 font-medium" 
+                                : isTraditional
+                                ? "text-gray-700"
+                                : "text-gray-700"
+                            }`}
+                          >
+                            {item.text}
+                          </span>
+                        </motion.li>
+                      );
+                    })}
+                  </ul>
                 </div>
 
-                <h3
-                  className={`text-2xl font-semibold mb-6 ${
-                    isOurSolution ? "text-primary-cta" : "text-gray-900"
-                  }`}
-                >
-                  {data.title}
-                </h3>
-                
-                <ul className="space-y-4 flex-1">
-                  {data.items.map((item, idx) => {
-                    const ItemIcon = item.icon;
-                    const isPositive = item.icon === Check || item.icon === Rocket || item.icon === Award || item.icon === TrendingUp;
-                    return (
-                      <motion.li
-                        key={idx}
-                        initial={{ opacity: 0, x: -20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.2 + idx * 0.1 }}
-                        className="flex items-start gap-3 group"
-                      >
-                        <div className={`shrink-0 w-8 h-8 rounded-lg flex items-center justify-center transition-colors ${
-                          isPositive
-                            ? "bg-primary-cta/10 text-primary-cta group-hover:bg-primary-cta/20"
-                            : "bg-red-50 text-red-500 group-hover:bg-red-100"
-                        }`}>
-                          {isPositive ? (
-                            <Check className="w-5 h-5" />
-                          ) : (
-                            <X className="w-5 h-5" />
-                          )}
-                        </div>
-                        <span
-                          className={`text-base leading-relaxed pt-1 ${
-                            isOurSolution ? "text-gray-900 font-medium" : "text-gray-700"
-                          }`}
-                        >
-                          {item.text}
-                        </span>
-                      </motion.li>
-                    );
-                  })}
-                </ul>
-
-                {/* Decorative Element */}
+                {/* Bottom Accent for Our Solution */}
                 {isOurSolution && (
-                  <div className="absolute top-4 right-4">
-                    <div className="w-3 h-3 bg-primary-cta rounded-full animate-pulse" />
+                  <div className="relative z-10 px-8 pb-8 bg-gradient-to-r from-white/10 to-transparent">
+                    <div className="h-px bg-gradient-to-r from-transparent via-white/30 to-transparent mb-6" />
+                    <div className="flex items-center gap-2 text-white/90">
+                      <Rocket className="w-5 h-5" />
+                      <span className="text-sm font-semibold">Fastest Path to Market</span>
+                    </div>
                   </div>
                 )}
               </motion.div>

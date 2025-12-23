@@ -1,148 +1,842 @@
 "use client";
 
-import { ArrowRight, ChevronDown } from "lucide-react";
+import { useState, useEffect } from "react";
+import { ArrowRight, ChevronDown, Lightbulb, Code, Rocket, CheckCircle } from "lucide-react";
 import { motion } from "framer-motion";
 import { siteConfig } from "@/config/siteConfig";
 
+// Using local logo files from public/images directory (l1 through l4)
+const companies = Array.from({ length: 4 }, (_, i) => ({
+  logo: `/images/l${i + 1}.svg`,
+}));
+
+// Generate star positions (only on client to avoid hydration mismatch)
+function generateStarPositions(count: number) {
+  return Array.from({ length: count }, (_, i) => ({
+    left: Math.random() * 100,
+    top: Math.random() * 100,
+    duration: 2 + Math.random(),
+    delay: Math.random() * 2,
+  }));
+}
+
 export function Hero() {
+  const [starPositions, setStarPositions] = useState<Array<{ left: number; top: number; duration: number; delay: number }>>([]);
+  const [starPositionsRight, setStarPositionsRight] = useState<Array<{ left: number; top: number; duration: number; delay: number }>>([]);
+
+  useEffect(() => {
+    setStarPositions(generateStarPositions(15));
+    setStarPositionsRight(generateStarPositions(15));
+  }, []);
+
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden to-white">
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <motion.div
-          className="absolute top-20 left-10 w-72 h-72 bg-primary-cta/5 rounded-full blur-3xl"
-          animate={{
-            x: [0, 30, 0],
-            y: [0, 20, 0],
-            scale: [1, 1.1, 1],
-          }}
-          transition={{
-            duration: 20,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        />
-      </div>
-
-      <div className="container mx-auto px-6 py-20 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            className="space-y-8"
-          >
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.1, duration: 0.5 }}
-              className="inline-flex items-center gap-2 backdrop-blur-md px-4 py-2 rounded-full shadow-lg border border-primary-cta/20 bg-white/80"
+    <section className="relative min-h-screen flex items-center overflow-hidden bg-white">
+      {/* Background with opacity - Left/Bottom */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          backgroundImage: 'url("/images/bg.svg")',
+          backgroundSize: 'contain',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'repeat',
+          opacity: 0.05,
+        }}
+      />
+      {/* Flipped Background - Right Side */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          backgroundImage: 'url("/images/bg.svg")',
+          backgroundSize: 'contain',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'repeat',
+          opacity: 0.05,
+          transform: 'scaleX(-1)',
+        }}
+      />
+      <div className="container mx-auto px-6 py-20  relative z-10 backdrop-blur-sm rounded-lg">
+        <div className="max-w-7xl mx-auto relative z-10">
+          {/* Two Column Layout: Content Left, Animation Right */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-32">
+            {/* Left Side - Content */}
+            <div className="text-left">
+            <motion.h1
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+                className="font-bold text-gray-900 mb-8 leading-tight"
+                style={{ fontSize: '56px' }}
             >
-              <div className="w-2 h-2 bg-primary-cta rounded-full animate-pulse" />
-              <span className="text-sm text-gray-700 font-medium">
-                Avaiable for January 2026
-              </span>
-            </motion.div>
+              Turn Your Idea Into a{" "}
+              <span className="text-primary-cta">Working</span>
+              <br />
+              <span className="text-primary-cta">Prototype</span> in 48 Hours
+            </motion.h1>
 
-            <div className="space-y-6">
-              <motion.h1
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2, duration: 0.8 }}
-                className="text-4xl lg:text-6xl text-gray-900 leading-tight font-normal"
-              >
-                Turn Your Idea Into a{" "}
-                <span className="bg-clip-text text-primary-cta">
-                  Working Prototype
-                </span>
-                <br />
-                in 48 Hours
-              </motion.h1>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2, duration: 0.6 }}
+                className="text-lg text-gray-600 mb-12 leading-relaxed"
+            >
+              Skip months of uncertainty with AI-Powered rapid prototyping. Get a working prototype delivered in 48 hours or full refund.
+            </motion.p>
 
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4, duration: 0.6 }}
-                className="text-lg text-gray-700 leading-relaxed max-w-xl"
-              >
-                Skip months of uncertainty with AI-Powered rapid prototyping. Get a working prototype delivered in 48 hours or full refund.
-              </motion.p>
-            </div>
-
+            {/* CTA Buttons */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5, duration: 0.6 }}
-              className="flex flex-wrap gap-4"
+              transition={{ delay: 0.4, duration: 0.6 }}
+                className="flex flex-wrap gap-4"
             >
               <motion.button
                 type="button"
                 onClick={() => window.open("https://calendly.com/wantace-ai/discovery-call", "_blank")}
-                aria-label="Get my prototype for $150"
-                transition={{ type: "spring", stiffness: 400, damping: 25 }}
-                className="group relative w-full sm:w-auto justify-center px-6 sm:px-8 py-3.5 sm:py-4 bg-primary-cta hover:bg-primary-cta-hover text-white rounded-xl text-base font-light hover:shadow-sm hover:shadow-primary-cta/50 transition-colors duration-300 overflow-hidden cursor-pointer flex will-change-transform"
+                whileHover={{ scale: 1.05, y: -2 }}
+                whileTap={{ scale: 0.95 }}
+                  className="px-8 py-4 bg-primary-cta hover:bg-primary-cta-hover text-white rounded-xl text-base font-semibold  hover:shadow-xl transition-all duration-300 cursor-pointer inline-flex items-center gap-2 will-change-transform"
+                aria-label="Book a Discovery Call"
               >
-                <span className="relative z-10 flex items-center justify-center gap-2">
-                  Get My Prototype for $150
-                  <ArrowRight
-                    className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300"
-                    aria-hidden="true"
-                  />
-                </span>
-                <span
-                  className="absolute inset-0 bg-primary-cta/20 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"
-                  aria-hidden="true"
-                ></span>
+                Book a Discovery Call
+                <ArrowRight className="w-5 h-5" />
               </motion.button>
             </motion.div>
+          </div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.7, duration: 0.6 }}
-              className="pt-8 border-t border-gray-200"
-            >
-              <div className="flex flex-col sm:flex-row items-center sm:items-start gap-3 sm:gap-4">
-                <div className="flex items-center gap-2">
-                  <div className="flex -space-x-2">
-                    {[
-                      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&auto=format",
-                      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&auto=format",
-                      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&auto=format",
-                      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&auto=format",
-                    ].map((imageUrl, i) => (
-                      <div
-                        key={i}
-                        className="w-8 h-8 rounded-full border-2 border-white overflow-hidden"
-                      >
-                        <img
-                          src={imageUrl}
-                          alt={`User ${i + 1}`}
-                          className="w-full h-full object-cover"
-                        />
+            {/* Right Side - MVP Build Phases */}
+            <div className="space-y-4">
+              {[
+                {
+                  step: "Phase 01",
+                  title: "Design & Architecture",
+                  description: "UI/UX wireframes, tech stack selection, and database schema design",
+                  gradient: "from-blue-500 to-cyan-500",
+                  duration: "0-8 hours",
+                  imagePosition: "left" as const,
+                  type: "wireframe" as const,
+                },
+                {
+                  step: "Phase 02",
+                  title: "Development Sprint",
+                  description: "Rapid coding, API integration, and core feature implementation",
+                  gradient: "from-purple-500 to-pink-500",
+                  duration: "8-40 hours",
+                  imagePosition: "right" as const,
+                  type: "code" as const,
+                },
+                {
+                  step: "Phase 03",
+                  title: "Testing & Launch",
+                  description: "QA testing, bug fixes, deployment, and handoff documentation",
+                  gradient: "from-orange-500 to-red-500",
+                  duration: "40-48 hours",
+                  imagePosition: "left" as const,
+                  type: "rocket" as const,
+                },
+              ].map((item, index) => {
+                return (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, x: item.imagePosition === "left" ? -50 : 50, scale: 0.9 }}
+                    animate={{ opacity: 1, x: 0, scale: 1 }}
+                    transition={{
+                      duration: 0.7,
+                      delay: index * 0.15,
+                      type: "spring",
+                      stiffness: 100
+                    }}
+                    whileHover={{
+                      scale: 1.02,
+                      y: -3,
+                      transition: { duration: 0.2 }
+                    }}
+                    className={`group relative grid grid-cols-1 gap-0 items-center rounded-lg shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden bg-white border border-gray-100 max-w-lg md:grid-cols-[1fr_1fr] ${index === 1 ? "md:translate-x-[10%]" : ""
+                      }`}
+                  >
+
+                    {/* Progress bar indicator */}
+                    <motion.div
+                      className={`absolute top-0 left-0 h-1`}
+                      initial={{ width: 0 }}
+                      animate={{ width: "100%" }}
+                      transition={{ duration: 1, delay: index * 0.15 + 0.3 }}
+                    />
+
+                    {item.imagePosition === "left" ? (
+                      <>
+                        {/* Infographic Section */}
+                        <motion.div
+                          className={`relative h-32 rounded-l-lg overflow-hidden flex items-center justify-center ${item.type === "rocket" ? "bg-black" : `bg-linear-to-br ${item.gradient}`
+                            }`}
+                          whileHover={{ scale: 1.05 }}
+                          transition={{ duration: 0.3 }}
+                        >
+                          {item.type === "wireframe" && (
+                            <div className="w-full h-full relative">
+                              {/* Wireframe Grid */}
+                              <div className="grid grid-cols-3 gap-2 h-full p-2">
+                                {[...Array(6)].map((_, i) => (
+                                  <motion.div
+                                    key={i}
+                                    className="bg-white/20 backdrop-blur-sm rounded border border-white/40"
+                                    initial={{ opacity: 0, scale: 0.8 }}
+                                    animate={{ opacity: 1, scale: 1 }}
+                                    transition={{ delay: index * 0.15 + 0.5 + i * 0.1 }}
+                                    whileHover={{ scale: 1.1, backgroundColor: "rgba(255,255,255,0.3)" }}
+                                  >
+                                    <div className="p-1.5 space-y-0.5">
+                                      <div className="h-1 bg-white/60 rounded w-3/4"></div>
+                                      <div className="h-0.5 bg-white/40 rounded w-full"></div>
+                                      <div className="h-0.5 bg-white/40 rounded w-2/3"></div>
+                                    </div>
+                                  </motion.div>
+                                ))}
+                              </div>
+                            </div>
+                          )}
+                          {item.type === "code" && (
+                            <div className="w-full h-full relative font-mono text-xs">
+                              {/* Code Editor Interface */}
+                              <div className="bg-gray-900/90 rounded-lg h-full overflow-hidden p-2">
+                                <div className="flex gap-1 mb-2">
+                                  <div className="w-2 h-2 rounded-full bg-red-400"></div>
+                                  <div className="w-2 h-2 rounded-full bg-yellow-400"></div>
+                                  <div className="w-2 h-2 rounded-full bg-green-400"></div>
+                                </div>
+                                <div className="space-y-1">
+                                  {[
+                                    { width: "60%", color: "bg-purple-400" },
+                                    { width: "80%", color: "bg-pink-400" },
+                                    { width: "45%", color: "bg-blue-400" },
+                                    { width: "70%", color: "bg-purple-300" },
+                                  ].map((line, i) => (
+                                    <motion.div
+                                      key={i}
+                                      className={`h-1.5 ${line.color} rounded opacity-80`}
+                                      style={{ width: line.width }}
+                                      initial={{ width: 0, opacity: 0 }}
+                                      animate={{ width: line.width, opacity: 0.8 }}
+                                      transition={{ delay: index * 0.15 + 0.5 + i * 0.1 }}
+                                    />
+                                  ))}
+                                </div>
+                                <motion.div
+                                  className="w-1 h-2 bg-white mt-0.5"
+                                  animate={{ opacity: [1, 0, 1] }}
+                                  transition={{ duration: 1, repeat: Infinity }}
+                                />
+                              </div>
+                            </div>
+                          )}
+                          {item.type === "rocket" && (
+                            <div className="w-full h-full relative flex items-center justify-center bg-black">
+                              {/* Stars background */}
+                              {starPositions.map((star, i) => (
+                                <motion.div
+                                  key={`star-${i}`}
+                                  className="absolute w-1 h-1 bg-white rounded-full"
+                                  style={{
+                                    left: `${star.left}%`,
+                                    top: `${star.top}%`,
+                                  }}
+                                  animate={{
+                                    opacity: [0.3, 1, 0.3],
+                                    scale: [0.8, 1.2, 0.8],
+                                  }}
+                                  transition={{
+                                    duration: star.duration,
+                                    repeat: Infinity,
+                                    delay: star.delay,
+                                  }}
+                                />
+                              ))}
+                              {/* Testing Animation - Left Side */}
+                              <motion.div
+                                className="absolute left-2 top-4 z-10"
+                                initial={{ opacity: 0, x: -20 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ delay: 0.5 }}
+                              >
+                                <div className="flex flex-col gap-2">
+                                  {["Test 1", "Test 2", "Test 3"].map((test, i) => (
+                                    <motion.div
+                                      key={test}
+                                      className="flex items-center gap-2"
+                                      initial={{ opacity: 0, x: -10 }}
+                                      animate={{ opacity: 1, x: 0 }}
+                                      transition={{ delay: 0.8 + i * 0.3 }}
+                                    >
+                                      <motion.div
+                                        className="w-4 h-4 rounded-full border-2 border-green-400 flex items-center justify-center"
+                                        animate={{
+                                          scale: [1, 1.2, 1],
+                                        }}
+                                        transition={{
+                                          duration: 0.5,
+                                          delay: 1 + i * 0.3,
+                                          repeat: 1,
+                                        }}
+                                      >
+                                        <motion.svg
+                                          width="8"
+                                          height="8"
+                                          viewBox="0 0 8 8"
+                                          initial={{ pathLength: 0 }}
+                                          animate={{ pathLength: 1 }}
+                                          transition={{
+                                            duration: 0.3,
+                                            delay: 1.2 + i * 0.3,
+                                          }}
+                                        >
+                                          <motion.path
+                                            d="M1 4 L3 6 L7 2"
+                                            stroke="#10b981"
+                                            strokeWidth="1.5"
+                                            fill="none"
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                          />
+                                        </motion.svg>
+                                      </motion.div>
+                                      <span className="text-[8px] text-green-400 font-semibold">{test}</span>
+                                    </motion.div>
+                                  ))}
+                                </div>
+                              </motion.div>
+                              {/* Rocket Launch Animation */}
+                              <motion.div
+                                className="relative z-10"
+                                animate={{ y: [0, -8, 0] }}
+                                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                              >
+                                <svg width="50" height="70" viewBox="0 0 50 70" className="text-white">
+                                  {/* Rocket body */}
+                                  <motion.rect
+                                    x="20"
+                                    y="10"
+                                    width="10"
+                                    height="40"
+                                    fill="white"
+                                    rx="2"
+                                    initial={{ opacity: 0, scale: 0 }}
+                                    animate={{ opacity: 1, scale: 1 }}
+                                    transition={{ delay: index * 0.15 + 0.5 }}
+                                  />
+                                  {/* Rocket nose cone */}
+                                  <motion.polygon
+                                    points="25,10 30,20 20,20"
+                                    fill="white"
+                                    initial={{ opacity: 0, scale: 0 }}
+                                    animate={{ opacity: 1, scale: 1 }}
+                                    transition={{ delay: index * 0.15 + 0.5 }}
+                                  />
+                                  {/* Rocket fins */}
+                                  <motion.polygon
+                                    points="20,50 15,60 20,60"
+                                    fill="white"
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    transition={{ delay: index * 0.15 + 0.6 }}
+                                  />
+                                  <motion.polygon
+                                    points="30,50 35,60 30,60"
+                                    fill="white"
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    transition={{ delay: index * 0.15 + 0.6 }}
+                                  />
+                                  {/* Window */}
+                                  <motion.circle
+                                    cx="25"
+                                    cy="25"
+                                    r="3"
+                                    fill="#1e40af"
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    transition={{ delay: index * 0.15 + 0.7 }}
+                                  />
+                                  {/* Exhaust flame */}
+                                  <motion.path
+                                    d="M20,50 Q15,55 12,60 Q20,58 25,60 Q30,58 38,60 Q35,55 30,50 Z"
+                                    fill="#ff6b35"
+                                    initial={{ opacity: 0, scaleY: 0 }}
+                                    animate={{
+                                      opacity: [0.8, 1, 0.8],
+                                      scaleY: [1, 1.2, 1],
+                                    }}
+                                    transition={{
+                                      duration: 0.5,
+                                      repeat: Infinity,
+                                      delay: index * 0.15 + 0.8,
+                                    }}
+                                  />
+                                </svg>
+                                {/* Exhaust particles */}
+                                {[...Array(5)].map((_, i) => (
+                                  <motion.div
+                                    key={`particle-${i}`}
+                                    className="absolute w-1 h-1 bg-orange-400 rounded-full"
+                                    style={{
+                                      left: `${45 + (i * 2)}%`,
+                                      top: "85%",
+                                    }}
+                                    animate={{
+                                      y: [0, 15],
+                                      opacity: [1, 0],
+                                      scale: [1, 0.3],
+                                      x: [0, (i - 2) * 3],
+                                    }}
+                                    transition={{
+                                      duration: 0.8,
+                                      repeat: Infinity,
+                                      delay: i * 0.15,
+                                    }}
+                                  />
+                                ))}
+                              </motion.div>
+                              {/* Testing Progress Indicator - Right Side */}
+                              <motion.div
+                                className="absolute right-2 bottom-4 z-10"
+                                initial={{ opacity: 0, x: 20 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ delay: 0.7 }}
+                              >
+                                <div className="flex flex-col gap-1.5 items-end">
+                                  <motion.div
+                                    className="text-[7px] text-blue-400 font-semibold mb-1"
+                                    animate={{ opacity: [0.5, 1, 0.5] }}
+                                    transition={{ duration: 1.5, repeat: Infinity }}
+                                  >
+                                    QA Progress
+                                  </motion.div>
+                                  {[100, 95, 88].map((progress, i) => (
+                                    <motion.div
+                                      key={`progress-${i}`}
+                                      className="flex items-center gap-1.5"
+                                      initial={{ opacity: 0, x: 10 }}
+                                      animate={{ opacity: 1, x: 0 }}
+                                      transition={{ delay: 1 + i * 0.2 }}
+                                    >
+                                      <div className="w-12 h-1.5 bg-gray-700 rounded-full overflow-hidden">
+                                        <motion.div
+                                          className="h-full bg-green-400 rounded-full"
+                                          initial={{ width: 0 }}
+                                          animate={{ width: `${progress}%` }}
+                                          transition={{
+                                            duration: 1,
+                                            delay: 1.2 + i * 0.2,
+                                            ease: "easeOut",
+                                          }}
+                                        />
+                                      </div>
+                                      <span className="text-[7px] text-green-400 font-semibold">{progress}%</span>
+                                    </motion.div>
+                                  ))}
+                                </div>
+                              </motion.div>
                       </div>
-                    ))}
+                          )}
+                        </motion.div>
+                        <div className="flex flex-col justify-center px-4 py-3 rounded-r-lg relative z-10">
+                          <motion.div
+                            className="text-[10px] font-semibold text-gray-400 uppercase tracking-wide mb-1"
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: index * 0.15 + 0.4 }}
+                          >
+                          {item.step}
+                          </motion.div>
+                          <motion.h3
+                            className="text-base font-bold text-gray-900 mb-1"
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: index * 0.15 + 0.5 }}
+                          >
+                            {item.title}
+                          </motion.h3>
+                          <motion.p
+                            className="text-xs text-gray-600 leading-snug mb-2"
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: index * 0.15 + 0.6 }}
+                          >
+                            {item.description}
+                          </motion.p>
+                          <motion.div
+                            className={`inline-flex items-center gap-1 text-[10px] font-semibold bg-linear-to-r ${item.gradient} bg-clip-text text-transparent`}
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ delay: index * 0.15 + 0.7 }}
+                          >
+                            ⏱ {item.duration}
+                          </motion.div>
+                        </div>
+                      </>
+                    ) : (
+                      <>
+                        <div className="flex flex-col justify-center px-4 py-3 rounded-l-lg relative z-10">
+                          <motion.div
+                            className="text-[10px] font-semibold text-gray-400 uppercase tracking-wide mb-1"
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: index * 0.15 + 0.4 }}
+                          >
+                            {item.step}
+                          </motion.div>
+                          <motion.h3
+                            className="text-base font-bold text-gray-900 mb-1"
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: index * 0.15 + 0.5 }}
+                          >
+                          {item.title}
+                          </motion.h3>
+                          <motion.p
+                            className="text-xs text-gray-600 leading-snug mb-2"
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: index * 0.15 + 0.6 }}
+                          >
+                          {item.description}
+                          </motion.p>
+                          <motion.div
+                            className={`inline-flex items-center gap-1 text-[10px] font-semibold bg-linear-to-r ${item.gradient} bg-clip-text text-transparent`}
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ delay: index * 0.15 + 0.7 }}
+                          >
+                            ⏱ {item.duration}
+                          </motion.div>
+                        </div>
+                        {/* Infographic Section */}
+                        <motion.div
+                          className={`relative h-32 rounded-r-lg overflow-hidden flex items-center justify-center ${item.type === "rocket" ? "bg-black" : `bg-gradient-to-br ${item.gradient}`
+                            }`}
+                          whileHover={{ scale: 1.05 }}
+                          transition={{ duration: 0.3 }}
+                        >
+                          {item.type === "wireframe" && (
+                            <div className="w-full h-full relative">
+                              {/* Wireframe Grid */}
+                              <div className="grid grid-cols-3 gap-2 h-full p-2">
+                                {[...Array(6)].map((_, i) => (
+                                  <motion.div
+                                    key={i}
+                                    className="bg-white/20 backdrop-blur-sm rounded border border-white/40"
+                                    initial={{ opacity: 0, scale: 0.8 }}
+                                    animate={{ opacity: 1, scale: 1 }}
+                                    transition={{ delay: index * 0.15 + 0.5 + i * 0.1 }}
+                                    whileHover={{ scale: 1.1, backgroundColor: "rgba(255,255,255,0.3)" }}
+                                  >
+                                    <div className="p-1.5 space-y-0.5">
+                                      <div className="h-1 bg-white/60 rounded w-3/4"></div>
+                                      <div className="h-0.5 bg-white/40 rounded w-full"></div>
+                                      <div className="h-0.5 bg-white/40 rounded w-2/3"></div>
+                                    </div>
+                                  </motion.div>
+                                ))}
+                              </div>
+                            </div>
+                          )}
+                          {item.type === "code" && (
+                            <div className="w-full h-full relative font-mono text-xs">
+                              {/* Code Editor Interface */}
+                              <div className="bg-gray-900/90 rounded-lg h-full p-3 overflow-hidden">
+                                <div className="flex gap-1.5 mb-3">
+                                  <div className="w-2.5 h-2.5 rounded-full bg-red-400"></div>
+                                  <div className="w-2.5 h-2.5 rounded-full bg-yellow-400"></div>
+                                  <div className="w-2.5 h-2.5 rounded-full bg-green-400"></div>
+                                </div>
+                                <div className="space-y-1.5">
+                                  {[
+                                    { width: "60%", color: "bg-purple-400" },
+                                    { width: "80%", color: "bg-pink-400" },
+                                    { width: "45%", color: "bg-blue-400" },
+                                    { width: "70%", color: "bg-purple-300" },
+                                    { width: "55%", color: "bg-pink-300" },
+                                  ].map((line, i) => (
+                                    <motion.div
+                                      key={i}
+                                      className={`h-2 ${line.color} rounded opacity-80`}
+                                      style={{ width: line.width }}
+                                      initial={{ width: 0, opacity: 0 }}
+                                      animate={{ width: line.width, opacity: 0.8 }}
+                                      transition={{ delay: index * 0.15 + 0.5 + i * 0.1 }}
+                                    />
+                                  ))}
+                                </div>
+                                <motion.div
+                                  className="w-1.5 h-3 bg-white mt-1"
+                                  animate={{ opacity: [1, 0, 1] }}
+                                  transition={{ duration: 1, repeat: Infinity }}
+                                />
+                      </div>
+                    </div>
+                          )}
+                          {item.type === "rocket" && (
+                            <div className="w-full h-full relative flex items-center justify-center bg-black">
+                              {/* Stars background */}
+                              {starPositionsRight.map((star, i) => (
+                                <motion.div
+                                  key={`star-right-${i}`}
+                                  className="absolute w-1 h-1 bg-white rounded-full"
+                                  style={{
+                                    left: `${star.left}%`,
+                                    top: `${star.top}%`,
+                                  }}
+                                  animate={{
+                                    opacity: [0.3, 1, 0.3],
+                                    scale: [0.8, 1.2, 0.8],
+                                  }}
+                                  transition={{
+                                    duration: star.duration,
+                                    repeat: Infinity,
+                                    delay: star.delay,
+                                  }}
+                                />
+                              ))}
+                              {/* Testing Animation - Left Side */}
+                              <motion.div
+                                className="absolute left-2 top-4 z-10"
+                                initial={{ opacity: 0, x: -20 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ delay: 0.5 }}
+                              >
+                                <div className="flex flex-col gap-2">
+                                  {["Test 1", "Test 2", "Test 3"].map((test, i) => (
+                                    <motion.div
+                                      key={test}
+                                      className="flex items-center gap-2"
+                                      initial={{ opacity: 0, x: -10 }}
+                                      animate={{ opacity: 1, x: 0 }}
+                                      transition={{ delay: 0.8 + i * 0.3 }}
+                                    >
+                                      <motion.div
+                                        className="w-4 h-4 rounded-full border-2 border-green-400 flex items-center justify-center"
+                                        animate={{
+                                          scale: [1, 1.2, 1],
+                                        }}
+                                        transition={{
+                                          duration: 0.5,
+                                          delay: 1 + i * 0.3,
+                                          repeat: 1,
+                                        }}
+                                      >
+                                        <motion.svg
+                                          width="8"
+                                          height="8"
+                                          viewBox="0 0 8 8"
+                                          initial={{ pathLength: 0 }}
+                                          animate={{ pathLength: 1 }}
+                                          transition={{
+                                            duration: 0.3,
+                                            delay: 1.2 + i * 0.3,
+                                          }}
+                                        >
+                                          <motion.path
+                                            d="M1 4 L3 6 L7 2"
+                                            stroke="#10b981"
+                                            strokeWidth="1.5"
+                                            fill="none"
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                          />
+                                        </motion.svg>
+                                      </motion.div>
+                                      <span className="text-[8px] text-green-400 font-semibold">{test}</span>
+                                    </motion.div>
+                                  ))}
+                                </div>
+                              </motion.div>
+                              {/* Rocket Launch Animation */}
+                              <motion.div
+                                className="relative z-10"
+                                animate={{ y: [0, -8, 0] }}
+                                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                              >
+                                <svg width="50" height="70" viewBox="0 0 50 70" className="text-white">
+                                  {/* Rocket body */}
+                                  <motion.rect
+                                    x="20"
+                                    y="10"
+                                    width="10"
+                                    height="40"
+                                    fill="white"
+                                    rx="2"
+                                    initial={{ opacity: 0, scale: 0 }}
+                                    animate={{ opacity: 1, scale: 1 }}
+                                    transition={{ delay: index * 0.15 + 0.5 }}
+                                  />
+                                  {/* Rocket nose cone */}
+                                  <motion.polygon
+                                    points="25,10 30,20 20,20"
+                                    fill="white"
+                                    initial={{ opacity: 0, scale: 0 }}
+                                    animate={{ opacity: 1, scale: 1 }}
+                                    transition={{ delay: index * 0.15 + 0.5 }}
+                                  />
+                                  {/* Rocket fins */}
+                                  <motion.polygon
+                                    points="20,50 15,60 20,60"
+                                    fill="white"
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    transition={{ delay: index * 0.15 + 0.6 }}
+                                  />
+                                  <motion.polygon
+                                    points="30,50 35,60 30,60"
+                                    fill="white"
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    transition={{ delay: index * 0.15 + 0.6 }}
+                                  />
+                                  {/* Window */}
+                                  <motion.circle
+                                    cx="25"
+                                    cy="25"
+                                    r="3"
+                                    fill="#1e40af"
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    transition={{ delay: index * 0.15 + 0.7 }}
+                                  />
+                                  {/* Exhaust flame */}
+                                  <motion.path
+                                    d="M20,50 Q15,55 12,60 Q20,58 25,60 Q30,58 38,60 Q35,55 30,50 Z"
+                                    fill="#ff6b35"
+                                    initial={{ opacity: 0, scaleY: 0 }}
+                                    animate={{
+                                      opacity: [0.8, 1, 0.8],
+                                      scaleY: [1, 1.2, 1],
+                                    }}
+                                    transition={{
+                                      duration: 0.5,
+                                      repeat: Infinity,
+                                      delay: index * 0.15 + 0.8,
+                                    }}
+                                  />
+                                </svg>
+                                {/* Exhaust particles */}
+                                {[...Array(5)].map((_, i) => (
+                                  <motion.div
+                                    key={`particle-right-${i}`}
+                                    className="absolute w-1 h-1 bg-orange-400 rounded-full"
+                                    style={{
+                                      left: `${45 + (i * 2)}%`,
+                                      top: "85%",
+                                    }}
+                                    animate={{
+                                      y: [0, 15],
+                                      opacity: [1, 0],
+                                      scale: [1, 0.3],
+                                      x: [0, (i - 2) * 3],
+                                    }}
+                                    transition={{
+                                      duration: 0.8,
+                                      repeat: Infinity,
+                                      delay: i * 0.15,
+                                    }}
+                                  />
+                                ))}
+                              </motion.div>
+                              {/* Testing Progress Indicator - Right Side */}
+                              <motion.div
+                                className="absolute right-2 bottom-4 z-10"
+                                initial={{ opacity: 0, x: 20 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ delay: 0.7 }}
+                              >
+                                <div className="flex flex-col gap-1.5 items-end">
+                                  <motion.div
+                                    className="text-[7px] text-blue-400 font-semibold mb-1"
+                                    animate={{ opacity: [0.5, 1, 0.5] }}
+                                    transition={{ duration: 1.5, repeat: Infinity }}
+                                  >
+                                    QA Progress
+                                  </motion.div>
+                                  {[100, 95, 88].map((progress, i) => (
+                                    <motion.div
+                                      key={`progress-right-${i}`}
+                                      className="flex items-center gap-1.5"
+                                      initial={{ opacity: 0, x: 10 }}
+                                      animate={{ opacity: 1, x: 0 }}
+                                      transition={{ delay: 1 + i * 0.2 }}
+                                    >
+                                      <div className="w-12 h-1.5 bg-gray-700 rounded-full overflow-hidden">
+                                        <motion.div
+                                          className="h-full bg-green-400 rounded-full"
+                                          initial={{ width: 0 }}
+                                          animate={{ width: `${progress}%` }}
+                                          transition={{
+                                            duration: 1,
+                                            delay: 1.2 + i * 0.2,
+                                            ease: "easeOut",
+                                          }}
+                                        />
+                                      </div>
+                                      <span className="text-[7px] text-green-400 font-semibold">{progress}%</span>
+                                    </motion.div>
+                                  ))}
+                                </div>
+                              </motion.div>
                   </div>
-                  <span className="text-sm font-semibold text-gray-900">500+</span>
-                </div>
-                <p className="text-base sm:text-lg text-gray-600 text-center sm:text-left">
-                  Entrepreneurs and startups trust us to bring their ideas to life
+                          )}
+                        </motion.div>
+                      </>
+                    )}
+                  </motion.div>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Trusted by Marquee Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6, duration: 0.6 }}
+            className="mb-12 sm:mb-16 md:mb-20 border border-gray-200 rounded-lg overflow-hidden"
+          >
+            <div className="flex flex-col sm:flex-row">
+              {/* Text Section */}
+              <div className="w-full sm:w-[20%] border-b sm:border-b-0 sm:border-r border-gray-200 px-6 py-4">
+                <p className="text-sm text-gray-500 leading-tight">
+                  Trusted by growth-focused
+                  <br />
+                  B2B companies worldwide
                 </p>
               </div>
-            </motion.div>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.3, duration: 0.8 }}
-            className="relative flex justify-center items-center"
-          >
-            <div className="w-full aspect-video max-w-2xl mx-auto rounded-2xl overflow-hidden bg-gray-100 border border-gray-200 shadow-2xl">
-              <img
-                src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1920&h=1080&fit=crop&auto=format"
-                alt="Hero image showing technology and innovation"
-                className="w-full h-full object-cover"
-              />
+              {/* Marquee Section */}
+              <div className="relative overflow-hidden py-4 flex-1">
+                <div className="absolute inset-0 bg-linear-to-r from-white via-transparent to-white z-10 pointer-events-none" />
+                <div className="flex animate-marquee space-x-8">
+                  {companies.map((company, index) => (
+                    <div
+                      key={index}
+                      className="shrink-0 flex items-center justify-center h-8 px-4"
+                    >
+                      <img
+                        src={company.logo}
+                        alt=""
+                        className="h-8 w-auto object-contain"
+                      />
+                    </div>
+                  ))}
+                  {/* Duplicate for seamless loop */}
+                  {companies.map((company, index) => (
+                    <div
+                      key={`duplicate-${index}`}
+                      className="shrink-0 flex items-center justify-center h-8 px-4"
+                    >
+                      <img
+                        src={company.logo}
+                        alt=""
+                        className="h-8 w-auto object-contain"
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
           </motion.div>
         </div>
