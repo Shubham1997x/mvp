@@ -93,7 +93,7 @@ export const FAQ = () => {
           <h2 className="text-4xl lg:text-5xl font-normal text-black mb-4">
             Common Questions
           </h2>
-          <p className="text-lg text-gray-600 leading-relaxed max-w-2xl mx-auto mt-4">
+          <p className="text-lg text-gray-600 leading-relaxed max-w-2xl mx-auto">
             Everything you need to know about our 48-hour prototype service
           </p>
         </div>
@@ -115,11 +115,10 @@ export const FAQ = () => {
               <button
                 key={category}
                 onClick={() => setSelectedCategory(category)}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 cursor-pointer ${
-                  selectedCategory === category
+                className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 cursor-pointer ${selectedCategory === category
                     ? "bg-primary-cta text-white shadow-md"
                     : "bg-white text-gray-600 hover:bg-gray-100 border border-gray-200"
-                }`}
+                  }`}
               >
                 {category}
               </button>

@@ -50,7 +50,7 @@ export function HowItWorks() {
             How We Turn Ideas Into Reality
           </motion.h2>
           <motion.p
-            className="text-lg text-gray-700 leading-relaxed"
+            className="text-lg text-gray-600 leading-relaxed max-w-2xl mx-auto"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "100px", amount: 0.3 }}

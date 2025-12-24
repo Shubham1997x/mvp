@@ -178,10 +178,10 @@ export const Features = () => {
           >
             Our Services
           </motion.div>
-          <h2 className="text-3xl lg:text-4xl font-normal text-black mb-3">
+          <h2 className="text-4xl lg:text-5xl font-normal text-black mb-4">
             Full-Stack Innovation Partners for Growing Businesses
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto mt-4">
+          <p className="text-lg text-gray-600 leading-relaxed max-w-2xl mx-auto">
             From rapid prototyping to full MVP development and ongoing growth support
           </p>
         </header>

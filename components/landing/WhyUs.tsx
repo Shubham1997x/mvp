@@ -1,54 +1,56 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { X, Check, Clock, DollarSign, Users, FileText, Code, Rocket, Award, TrendingUp } from "lucide-react";
 
 const comparison = {
   traditional: {
     title: "Traditional Development",
-    icon: Clock,
-    items: [
-      { text: "Costs $10k-50k upfront", icon: DollarSign },
-      { text: "Takes 3-6 months to see anything", icon: Clock },
-      { text: "No idea if users will actually want it", icon: Users },
-      { text: "Endless meetings and documentation", icon: FileText },
+    keyPoints: [
+      "$10k-50k upfront",
+      "3-6 months wait",
+      "Uncertain outcome",
     ],
+    image: "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=600&h=400&fit=crop",
   },
   diy: {
     title: "DIY Approach",
-    icon: Code,
-    items: [
-      { text: "Overwhelmed by the complexity", icon: Code },
-      { text: "Months of learning before building", icon: Clock },
-      { text: "Bugs and issues you can't solve", icon: X },
-      { text: "Looks unprofessional", icon: Award },
+    keyPoints: [
+      "Months of learning",
+      "Complex challenges",
+      "Unprofessional result",
     ],
+    image: "https://images.unsplash.com/photo-1551033406-611cf9a28f61?w=600&h=400&fit=crop",
   },
   ourSolution: {
     title: "Our Solution",
-    icon: Rocket,
-    items: [
-      { text: "Working prototype in 48 hours", icon: Rocket },
-      { text: "Professional-grade result", icon: Award },
-      { text: "Investment-ready concept", icon: TrendingUp },
-      { text: "Clear path to full development", icon: Check },
+    keyPoints: [
+      "48 hours delivery",
+      "Professional quality",
+      "Investment ready",
     ],
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop",
   },
 };
 
 export function WhyUs() {
   return (
-    <section id="why-us" className="py-12 sm:py-16 md:py-24 px-4 sm:px-6 bg-gradient-to-b from-gray-50 to-white">
-      <div className="container mx-auto max-w-7xl">
+    <section id="why-us" className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 bg-white relative overflow-hidden">
+      {/* Background decoration */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute top-0 left-0 w-96 h-96 bg-primary-cta rounded-full blur-3xl" />
+        <div className="absolute bottom-0 right-0 w-96 h-96 bg-primary-cta rounded-full blur-3xl" />
+      </div>
+
+      <div className="container mx-auto max-w-7xl relative z-10">
         <motion.div
-          className="text-center mb-16"
+          className="text-center mb-10 sm:mb-12"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
           <motion.div
-            className="inline-block px-4 py-2 bg-primary-cta/10 border border-primary-cta/20 text-primary-cta rounded-full mb-4 text-sm font-semibold"
+            className="inline-block px-4 py-2 bg-primary-cta/10 text-primary-cta rounded-full mb-4"
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
@@ -64,165 +66,166 @@ export function WhyUs() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 items-stretch">
-          {Object.entries(comparison).map(([key, data], index) => {
-            const isOurSolution = key === "ourSolution";
-            const isTraditional = key === "traditional";
-            const isDiy = key === "diy";
-            const TitleIcon = data.icon;
-            return (
-              <motion.div
-                key={key}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                whileHover={{ 
-                  y: -8,
-                  scale: 1.01
-                }}
-                transition={{
-                  type: "spring",
-                  stiffness: 300,
-                  damping: 30
-                }}
-                className={`relative rounded-3xl h-full flex flex-col overflow-hidden will-change-transform ${
-                  isOurSolution
-                    ? "bg-gradient-to-br from-primary-cta via-primary-cta/95 to-primary-cta/90 text-white shadow-2xl border-2 border-primary-cta/50"
-                    : isTraditional
-                    ? "bg-white border border-gray-200/60 hover:border-gray-300 hover:shadow-xl"
-                    : "bg-gradient-to-br from-gray-50 to-white border border-gray-200/60 hover:border-gray-300 hover:shadow-xl"
-                }`}
-              >
-                {/* Background Pattern for Our Solution */}
-                {isOurSolution && (
-                  <div className="absolute inset-0 opacity-10">
-                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.3),transparent_50%)]" />
-                    <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl" />
-                    <div className="absolute bottom-0 left-0 w-48 h-48 bg-white/10 rounded-full blur-2xl" />
-                  </div>
-                )}
-
-                {/* Combined Section */}
-                <div className={`relative z-10 p-8 pb-8 flex-1 ${
-                  isOurSolution ? "bg-gradient-to-r from-white/10 to-transparent" : ""
-                }`}>
-                  <div className="flex items-start justify-between mb-6">
-                    <div className={`inline-flex items-center justify-center w-16 h-16 rounded-2xl ${
-                      isOurSolution 
-                        ? "bg-white/20 backdrop-blur-sm shadow-lg" 
-                        : isTraditional
-                        ? "bg-gradient-to-br from-red-50 to-red-100/50"
-                        : "bg-gradient-to-br from-orange-50 to-orange-100/50"
-                    }`}>
-                      <TitleIcon className={`w-8 h-8 ${
-                        isOurSolution 
-                          ? "text-white" 
-                          : isTraditional
-                          ? "text-red-600"
-                          : "text-orange-600"
-                      }`} />
-                    </div>
-                    
-                    {isOurSolution && (
-                      <div className="px-3 py-1.5 bg-white/20 backdrop-blur-sm rounded-full border border-white/30">
-                        <span className="text-xs font-semibold text-white">RECOMMENDED</span>
-                      </div>
-                    )}
-                    
-                    {(isTraditional || isDiy) && (
-                      <div className={`px-3 py-1.5 rounded-full ${
-                        isTraditional
-                          ? "bg-red-50 border border-red-200"
-                          : "bg-orange-50 border border-orange-200"
-                      }`}>
-                        <span className={`text-xs font-semibold ${
-                          isTraditional ? "text-red-600" : "text-orange-600"
-                        }`}>
-                          {isTraditional ? "EXPENSIVE" : "COMPLEX"}
-                        </span>
-                      </div>
-                    )}
-                  </div>
-
-                  <h3
-                    className={`text-2xl font-bold mb-8 ${
-                      isOurSolution 
-                        ? "text-white" 
-                        : isTraditional
-                        ? "text-gray-900"
-                        : "text-gray-900"
-                    }`}
+        {/* Radically different layout - Split design with center focus */}
+        <div className="space-y-6">
+          {/* Traditional & DIY - Side by side */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {Object.entries(comparison)
+              .filter(([key]) => key !== "ourSolution")
+              .map(([key, data], index) => {
+                const isTraditional = key === "traditional";
+                
+                return (
+                  <motion.div
+                    key={key}
+                    initial={{ opacity: 0, x: isTraditional ? -50 : 50 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true, margin: "-50px" }}
+                    transition={{ duration: 0.6, delay: index * 0.1 }}
+                    className="group relative"
                   >
-                    {data.title}
+                    <div className="relative h-full bg-white border border-gray-200 rounded-2xl overflow-hidden hover:shadow-xl transition-all duration-300">
+                      {/* Content */}
+                      <div className="relative p-6 h-full flex flex-col">
+                        {/* Badge */}
+                        <div className="mb-4">
+                          <span className={`inline-block px-3 py-1 rounded-full text-xs font-semibold ${
+                            isTraditional
+                              ? "bg-red-50 text-red-600 border border-red-200"
+                              : "bg-orange-50 text-orange-600 border border-orange-200"
+                          }`}>
+                            {isTraditional ? "EXPENSIVE" : "COMPLEX"}
+                          </span>
+                        </div>
+
+                        {/* Title */}
+                        <h3 className="text-xl font-semibold text-gray-900 mb-4">
+                          {data.title}
+                        </h3>
+
+                        {/* Key Points */}
+                        <ul className="space-y-2 flex-1">
+                          {data.keyPoints.map((point, idx) => (
+                            <motion.li
+                              key={idx}
+                              initial={{ opacity: 0, x: -20 }}
+                              whileInView={{ opacity: 1, x: 0 }}
+                              viewport={{ once: true }}
+                              transition={{ delay: 0.2 + idx * 0.1 }}
+                              className="flex items-center gap-3 text-gray-700"
+                            >
+                              <div className={`shrink-0 w-2 h-2 rounded-full ${
+                                isTraditional ? "bg-red-500" : "bg-orange-500"
+                              }`} />
+                              <span className="text-sm">{point}</span>
+                            </motion.li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  </motion.div>
+                );
+              })}
+          </div>
+
+          {/* Our Solution - Center featured card */}
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="relative"
+          >
+            <div className="relative bg-linear-to-br from-primary-cta via-primary-cta/95 to-primary-cta/90 rounded-3xl overflow-hidden shadow-2xl border-2 border-primary-cta/30">
+              {/* Content */}
+              <div className="relative p-8 md:p-10">
+                <div className="max-w-4xl mx-auto">
+                  {/* Badge */}
+                  <motion.div
+                    className="mb-4"
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.3 }}
+                  >
+                    <span className="inline-block px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full text-xs font-semibold text-white border border-white/30">
+                      RECOMMENDED
+                    </span>
+                  </motion.div>
+
+                  {/* Title */}
+                  <h3 className="text-2xl md:text-3xl font-bold text-white mb-6">
+                    {comparison.ourSolution.title}
                   </h3>
 
-                  <ul className="space-y-5">
-                    {data.items.map((item, idx) => {
-                      const ItemIcon = item.icon;
-                      const isPositive = item.icon === Check || item.icon === Rocket || item.icon === Award || item.icon === TrendingUp;
-                      return (
-                        <motion.li
-                          key={idx}
-                          initial={{ opacity: 0, x: -20 }}
-                          whileInView={{ opacity: 1, x: 0 }}
-                          viewport={{ once: true }}
-                          transition={{ 
-                            delay: 0.2 + idx * 0.1,
-                            type: "spring",
-                            stiffness: 300,
-                            damping: 25
-                          }}
-                          className="flex items-start gap-4 group"
-                        >
-                          <div className={`shrink-0 w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-300 ${
-                            isOurSolution
-                              ? "bg-white/20 backdrop-blur-sm text-white group-hover:bg-white/30 group-hover:scale-110"
-                              : isPositive
-                              ? "bg-primary-cta/10 text-primary-cta group-hover:bg-primary-cta/20 group-hover:scale-110"
-                              : isTraditional
-                              ? "bg-red-50 text-red-600 group-hover:bg-red-100 group-hover:scale-110"
-                              : "bg-orange-50 text-orange-600 group-hover:bg-orange-100 group-hover:scale-110"
-                          }`}>
-                            {isPositive ? (
-                              <Check className="w-5 h-5" />
-                            ) : (
-                              <X className="w-5 h-5" />
-                            )}
-                          </div>
-                          <span
-                            className={`text-base leading-relaxed pt-2 ${
-                              isOurSolution 
-                                ? "text-white/95 font-medium" 
-                                : isTraditional
-                                ? "text-gray-700"
-                                : "text-gray-700"
-                            }`}
+                  {/* Key Points - Grid layout */}
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                    {comparison.ourSolution.keyPoints.map((point, idx) => (
+                      <motion.div
+                        key={idx}
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.4 + idx * 0.1 }}
+                        className="bg-white/10 backdrop-blur-sm rounded-xl p-5 border border-white/20"
+                      >
+                        <div className="flex items-center gap-3 mb-3">
+                          <motion.div
+                            className="w-8 h-8 rounded-full bg-white/20 backdrop-blur-sm border border-white/30 flex items-center justify-center"
+                            initial={{ scale: 0, rotate: -180 }}
+                            whileInView={{ scale: 1, rotate: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.5 + idx * 0.1, type: "spring" }}
                           >
-                            {item.text}
-                          </span>
-                        </motion.li>
-                      );
-                    })}
-                  </ul>
-                </div>
-
-                {/* Bottom Accent for Our Solution */}
-                {isOurSolution && (
-                  <div className="relative z-10 px-8 pb-8 bg-gradient-to-r from-white/10 to-transparent">
-                    <div className="h-px bg-gradient-to-r from-transparent via-white/30 to-transparent mb-6" />
-                    <div className="flex items-center gap-2 text-white/90">
-                      <Rocket className="w-5 h-5" />
-                      <span className="text-sm font-semibold">Fastest Path to Market</span>
-                    </div>
+                            <svg
+                              width="16"
+                              height="16"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="white"
+                              strokeWidth="2.5"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            >
+                              <motion.path
+                                d="M20 6L9 17l-5-5"
+                                initial={{ pathLength: 0 }}
+                                whileInView={{ pathLength: 1 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: 0.6 + idx * 0.1, duration: 0.4 }}
+                              />
+                            </svg>
+                          </motion.div>
+                        </div>
+                        <p className="text-white/90 text-sm leading-relaxed font-medium">{point}</p>
+                      </motion.div>
+                    ))}
                   </div>
-                )}
-              </motion.div>
-            );
-          })}
+
+                  {/* Bottom CTA */}
+                  <motion.div
+                    className="flex items-center gap-3 pt-4 border-t border-white/20"
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.7 }}
+                  >
+                    <motion.div
+                      className="w-2 h-2 rounded-full bg-white"
+                      animate={{ scale: [1, 1.3, 1], opacity: [1, 0.7, 1] }}
+                      transition={{ duration: 2, repeat: Infinity }}
+                    />
+                    <span className="text-white/90 text-sm font-medium">Fastest Path to Market</span>
+                  </motion.div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
         </div>
 
+        {/* CTA Button */}
         <motion.div
-          className="text-center mt-12"
+          className="text-center mt-10"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -237,11 +240,21 @@ export function WhyUs() {
             aria-label="Get your prototype"
           >
             Get My Prototype for $150
-            <Rocket className="w-5 h-5" />
+            <motion.svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              animate={{ x: [0, 4, 0] }}
+              transition={{ duration: 1.5, repeat: Infinity }}
+            >
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </motion.svg>
           </motion.button>
         </motion.div>
       </div>
     </section>
   );
 }
-

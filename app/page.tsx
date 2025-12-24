@@ -27,8 +27,8 @@ export default function Home() {
       <Navbar />
       <main id="main-content" tabIndex={-1}>
         <Hero />
-        <Showcase />
         <HowItWorks />
+        <Showcase />
         <Features />
         <WhyUs />
         <Stats />
