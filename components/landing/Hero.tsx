@@ -110,7 +110,6 @@ function TestingIndicators({ index }: { index: number }) {
 function RocketAnimation({ index, stars }: { index: number; stars: Array<{ left: number; top: number; duration: number; delay: number }> }) {
   return (
     <div className="w-full h-full relative flex items-center justify-center bg-black">
-      <StarsBackground stars={stars} />
       <TestingIndicators index={index} />
       <motion.div className="relative z-10" animate={{ y: [0, -8, 0] }} transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}>
         <svg width="50" height="70" viewBox="0 0 50 70" className="text-white">
@@ -219,7 +218,7 @@ function InfographicSection({ item, index, stars }: { item: typeof PHASES[0]; in
   const roundedClass = isLeft ? "rounded-l-lg" : "rounded-r-lg";
 
   return (
-    <motion.div className={`relative h-32 ${roundedClass} overflow-hidden flex items-center justify-center ${bgClass}`} whileHover={{ scale: 1.05 }} transition={{ duration: 0.3 }}>
+    <motion.div className={`relative h-32 ${roundedClass} overflow-hidden flex items-center justify-center ${bgClass}`}>
       {item.type === "wireframe" && <WireframeAnimation index={index} />}
       {item.type === "code" && <CodeEditorAnimation index={index} isRight={!isLeft} />}
       {item.type === "rocket" && <RocketAnimation index={index} stars={stars} />}

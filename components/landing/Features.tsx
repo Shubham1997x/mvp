@@ -62,21 +62,21 @@ function PrototypeInfographic({ index }: { index: number }) {
         {[...Array(4)].map((_, i) => (
           <motion.div
             key={i}
-            className="bg-white/20 backdrop-blur-sm rounded border border-white/30"
+            className="rounded border border-primary-cta/30 bg-primary-cta/10"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: index * 0.1 + i * 0.1 }}
           >
             <div className="p-2 space-y-1 h-full flex flex-col justify-center">
-              <div className="h-1 bg-white/60 rounded w-3/4"></div>
-              <div className="h-0.5 bg-white/40 rounded w-full"></div>
-              <div className="h-0.5 bg-white/40 rounded w-2/3"></div>
+              <div className="h-1 bg-primary-cta rounded w-3/4"></div>
+              <div className="h-0.5 bg-primary-cta/80 rounded w-full"></div>
+              <div className="h-0.5 bg-primary-cta/60 rounded w-2/3"></div>
             </div>
           </motion.div>
         ))}
       </div>
       <motion.div
-        className="absolute top-2 right-2 w-2 h-2 bg-green-400 rounded-full"
+        className="absolute top-2 right-2 w-2 h-2 bg-primary-cta rounded-full"
         animate={{ scale: [1, 1.3, 1], opacity: [1, 0.7, 1] }}
         transition={{ duration: 1.5, repeat: Infinity }}
       />
@@ -86,14 +86,14 @@ function PrototypeInfographic({ index }: { index: number }) {
 
 function CodeInfographic({ index }: { index: number }) {
   const lines = [
-    { width: "70%", color: "bg-purple-300" },
-    { width: "85%", color: "bg-pink-300" },
-    { width: "60%", color: "bg-blue-300" },
-    { width: "75%", color: "bg-purple-200" },
+    { width: "70%", color: "bg-primary-cta" },
+    { width: "85%", color: "bg-primary-cta/90" },
+    { width: "60%", color: "bg-primary-cta/80" },
+    { width: "75%", color: "bg-primary-cta/70" },
   ];
   return (
     <div className="w-full h-full relative font-mono text-xs">
-      <div className="bg-gray-900/90 w-full h-full p-3 overflow-hidden flex flex-col">
+      <div className="w-full h-full p-3 overflow-hidden flex flex-col bg-primary-cta/10 rounded-lg">
         <div className="flex gap-1 mb-2">
           <div className="w-2 h-2 rounded-full bg-red-400"></div>
           <div className="w-2 h-2 rounded-full bg-yellow-400"></div>
@@ -103,16 +103,16 @@ function CodeInfographic({ index }: { index: number }) {
           {lines.map((line, i) => (
             <motion.div
               key={i}
-              className="h-1.5 bg-white/20 rounded"
+              className={`h-1.5 ${line.color} rounded`}
               style={{ width: line.width }}
               initial={{ width: 0, opacity: 0 }}
-              animate={{ width: line.width, opacity: 0.8 }}
+              animate={{ width: line.width, opacity: 1 }}
               transition={{ delay: index * 0.1 + i * 0.15 }}
             />
           ))}
         </div>
         <motion.div
-          className="w-1 h-2 mt-1 bg-white"
+          className="w-1 h-2 mt-1 bg-primary-cta"
           animate={{ opacity: [1, 0, 1] }}
           transition={{ duration: 1, repeat: Infinity }}
         />
@@ -123,16 +123,17 @@ function CodeInfographic({ index }: { index: number }) {
 
 function SettingsInfographic({ index }: { index: number }) {
   return (
-    <div className="w-full h-full relative flex items-center justify-center">
-      <motion.svg
-        width="44"
-        height="44"
-        viewBox="0 0 48 48"
-        className="text-white"
-        initial={{ opacity: 0, rotate: -90 }}
-        animate={{ opacity: 1, rotate: 0 }}
-        transition={{ delay: index * 0.1 }}
-      >
+    <div className="w-full h-full relative flex items-center justify-center bg-primary-cta/10 rounded-lg">
+      <div className="w-20 h-20 bg-primary-cta/10 rounded-full flex items-center justify-center">
+        <motion.svg
+          width="44"
+          height="44"
+          viewBox="0 0 48 48"
+          className="text-primary-cta"
+          initial={{ opacity: 0, rotate: -90 }}
+          animate={{ opacity: 1, rotate: 0 }}
+          transition={{ delay: index * 0.1 }}
+        >
         <motion.circle
           cx="24"
           cy="24"
@@ -142,8 +143,14 @@ function SettingsInfographic({ index }: { index: number }) {
           strokeWidth="2"
           strokeDasharray="113"
           strokeDashoffset="113"
-          animate={{ strokeDashoffset: 0 }}
-          transition={{ duration: 1, delay: index * 0.1 + 0.3 }}
+          animate={{ strokeDashoffset: [113, 0] }}
+          transition={{ 
+            duration: 1.5, 
+            repeat: Infinity, 
+            repeatDelay: 3,
+            delay: index * 0.1 + 0.3,
+            ease: "easeInOut"
+          }}
         />
         <circle cx="24" cy="24" r="4" fill="currentColor" opacity="0.9" />
         {[0, 1, 2, 3].map((i) => (
@@ -159,47 +166,71 @@ function SettingsInfographic({ index }: { index: number }) {
           />
         ))}
       </motion.svg>
+      </div>
     </div>
   );
 }
 
 function ChartInfographic({ index }: { index: number }) {
   const bars = [60, 80, 70, 90, 75];
+  const animateDuration = 1.5;
+  const holdTime = 3;
+  const fadeOutDuration = 0.15;
+  const maxStaggerDelay = (bars.length - 1) * 0.1;
+  const totalCycle = animateDuration + maxStaggerDelay + holdTime + fadeOutDuration;
+  
   return (
     <div className="w-full h-full relative flex items-end justify-center gap-2 px-4 py-4">
-      {bars.map((height, i) => (
-        <motion.div
-          key={i}
-          className="bg-white/80 rounded-t flex-1"
-          style={{ height: `${height}%` }}
-          initial={{ height: 0, opacity: 0 }}
-          animate={{ height: `${height}%`, opacity: 1 }}
-          transition={{ delay: index * 0.1 + i * 0.1, duration: 0.4 }}
-        />
-      ))}
+      <div className="absolute inset-0 bg-primary-cta/10 rounded-lg"></div>
+      {bars.map((height, i) => {
+        const initialDelay = index * 0.1 + i * 0.1;
+        const animateEndTime = (animateDuration + initialDelay) / totalCycle;
+        const fadeOutStartTime = (animateDuration + maxStaggerDelay + holdTime) / totalCycle;
+        const fadeOutEndTime = (animateDuration + maxStaggerDelay + holdTime + fadeOutDuration) / totalCycle;
+        
+        return (
+          <motion.div
+            key={i}
+            className="bg-primary-cta rounded-t flex-1 relative z-10"
+            animate={{ 
+              height: [`0%`, `${height}%`, `${height}%`, `0%`], 
+              opacity: [0, 1, 1, 0] 
+            }}
+            transition={{ 
+              duration: totalCycle,
+              times: [0, animateEndTime, fadeOutStartTime, fadeOutEndTime, 1],
+              repeat: Infinity,
+              repeatDelay: 0,
+              delay: initialDelay,
+              ease: ["easeInOut", "linear", "linear", "easeInOut", "linear"]
+            }}
+          />
+        );
+      })}
     </div>
   );
 }
 
 function AIInfographic({ index }: { index: number }) {
   return (
-    <div className="w-full h-full relative flex items-center justify-center">
+    <div className="w-full h-full relative flex items-center justify-center bg-primary-cta/10 rounded-lg">
       <div className="relative">
+        <div className="absolute inset-0 w-20 h-20 bg-primary-cta/10 rounded-full -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2"></div>
         {[...Array(3)].map((_, i) => (
           <motion.div
             key={i}
-            className="absolute inset-0 border-2 border-white/40 rounded-full"
+            className="absolute inset-0 border-2 border-primary-cta/40 rounded-full"
             style={{ width: `${36 + i * 18}px`, height: `${36 + i * 18}px`, left: `${-18 - i * 9}px`, top: `${-18 - i * 9}px` }}
-            animate={{ scale: [1, 1.1, 1], opacity: [0.4, 0.6, 0.4] }}
+            animate={{ opacity: [0.6, 0.8, 0.6] }}
             transition={{ duration: 2, repeat: Infinity, delay: i * 0.3 }}
           />
         ))}
         <motion.div
-          className="w-7 h-7 bg-white/90 rounded-lg flex items-center justify-center"
+          className="w-7 h-7 bg-primary-cta rounded-lg flex items-center justify-center relative z-10"
           animate={{ rotate: [0, 360] }}
           transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
         >
-          <span className="text-xs font-bold text-gray-900">AI</span>
+          <span className="text-xs font-bold text-white">AI</span>
         </motion.div>
       </div>
     </div>
@@ -208,16 +239,17 @@ function AIInfographic({ index }: { index: number }) {
 
 function TargetInfographic({ index }: { index: number }) {
   return (
-    <div className="w-full h-full relative flex items-center justify-center">
-      <motion.svg
-        width="44"
-        height="44"
-        viewBox="0 0 48 48"
-        className="text-white"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: index * 0.1 }}
-      >
+    <div className="w-full h-full relative flex items-center justify-center bg-primary-cta/10 rounded-lg">
+      <div className="w-20 h-20 bg-primary-cta/10 rounded-full flex items-center justify-center">
+        <motion.svg
+          width="44"
+          height="44"
+          viewBox="0 0 48 48"
+          className="text-primary-cta"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: index * 0.1 }}
+        >
         {[0, 1, 2].map((ring) => (
           <motion.circle
             key={ring}
@@ -229,8 +261,14 @@ function TargetInfographic({ index }: { index: number }) {
             strokeWidth="1.5"
             opacity={0.6 - ring * 0.2}
             initial={{ pathLength: 0 }}
-            animate={{ pathLength: 1 }}
-            transition={{ duration: 0.8, delay: index * 0.1 + ring * 0.2 }}
+            animate={{ pathLength: [0, 1] }}
+            transition={{ 
+              duration: 1.5, 
+              repeat: Infinity, 
+              repeatDelay: 3,
+              delay: index * 0.1 + ring * 0.2,
+              ease: "easeInOut"
+            }}
           />
         ))}
         <motion.circle
@@ -243,6 +281,7 @@ function TargetInfographic({ index }: { index: number }) {
           transition={{ duration: 0.3, delay: index * 0.1 + 0.6 }}
         />
       </motion.svg>
+      </div>
     </div>
   );
 }
@@ -304,15 +343,11 @@ export const Features = () => {
                 }}
               >
               <div className="h-full bg-white border border-gray-100 rounded-lg overflow-hidden hover:border-gray-200 hover:shadow-lg transition-all duration-300">
-                    <motion.div
-                  className={`relative h-40 bg-gradient-to-br ${feature.gradient} flex items-center justify-center`}
-                  whileHover={{ scale: 1.02 }}
-                  transition={{ duration: 0.3 }}
-                >
+                <div className="relative h-40 flex items-center justify-center">
                   <FeatureInfographic type={feature.infographic} index={index} />
-                    </motion.div>
+                  </div>
                   
-                <div className="p-6">
+                <div className="p-6 border-t border-gray-100">
                   <h3 className="text-lg font-semibold text-gray-900 mb-2">
                       {feature.title}
                     </h3>

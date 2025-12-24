@@ -138,9 +138,14 @@ export function HowItWorks() {
                                   strokeWidth="2"
                                   opacity="0.3"
                                   initial={{ pathLength: 0 }}
-                                  whileInView={{ pathLength: 1 }}
-                                  viewport={{ once: true, margin: "50px", amount: 0.3 }}
-                                  transition={{ delay: 0.6 + i * 0.05, duration: 0.4 }}
+                                  animate={{ pathLength: [0, 1] }}
+                                  transition={{ 
+                                    duration: 1.5, 
+                                    repeat: Infinity, 
+                                    repeatDelay: 3,
+                                    delay: 0.6 + i * 0.05,
+                                    ease: "easeInOut"
+                                  }}
                                 />
                               );
                             })}
@@ -160,27 +165,24 @@ export function HowItWorks() {
                           </div>
                         </motion.div>
                         {/* Notes Animation */}
-                        <motion.div
-                          className="absolute top-4 right-4 bg-white rounded-lg shadow-md p-2"
-                          initial={{ opacity: 0, y: -20 }}
-                          whileInView={{ opacity: 1, y: 0 }}
-                          viewport={{ once: true, margin: "50px", amount: 0.3 }}
-                          transition={{ delay: 1, duration: 0.5 }}
-                        >
+                        <div className="absolute top-4 right-4 bg-white rounded-lg shadow-md p-2 w-[100px]">
                           <div className="space-y-1">
                             {[...Array(3)].map((_, i) => (
                               <motion.div
                                 key={i}
                                 className="h-1 bg-gray-300 rounded"
-                                style={{ width: `${60 + i * 10}px` }}
-                                initial={{ width: 0 }}
-                                whileInView={{ width: `${60 + i * 10}px` }}
-                                viewport={{ once: true, margin: "50px", amount: 0.3 }}
-                                transition={{ delay: 1.2 + i * 0.2, duration: 0.4 }}
+                                animate={{ width: [`0px`, `${60 + i * 10}px`] }}
+                                transition={{ 
+                                  duration: 1.5, 
+                                  repeat: Infinity, 
+                                  repeatDelay: 3,
+                                  delay: 1.2 + i * 0.2,
+                                  ease: "easeInOut"
+                                }}
                               />
                             ))}
                           </div>
-                        </motion.div>
+                        </div>
                       </div>
                     </div>
                   )}
@@ -191,7 +193,7 @@ export function HowItWorks() {
                       <div className="relative w-full h-full flex flex-col items-center justify-center gap-4">
                         {/* Code Editor */}
                         <motion.div
-                          className="w-full max-w-xs bg-gray-900 rounded-lg p-4 font-mono text-xs"
+                          className="w-full max-w-xs bg-white rounded-lg p-4 font-mono text-xs"
                           initial={{ opacity: 0, scale: 0.9 }}
                           whileInView={{ opacity: 1, scale: 1 }}
                           viewport={{ once: true, margin: "50px", amount: 0.3 }}
@@ -212,11 +214,14 @@ export function HowItWorks() {
                               <motion.div
                                 key={i}
                                 className={`h-2 ${line.color} rounded`}
-                                style={{ width: line.width }}
-                                initial={{ width: 0 }}
-                                whileInView={{ width: line.width }}
-                                viewport={{ once: true, margin: "50px", amount: 0.3 }}
-                                transition={{ delay: 0.5 + i * 0.2, duration: 0.5 }}
+                                animate={{ width: ["0%", line.width] }}
+                                transition={{ 
+                                  duration: 1.5, 
+                                  repeat: Infinity, 
+                                  repeatDelay: 2,
+                                  delay: 0.5 + i * 0.2,
+                                  ease: "easeInOut"
+                                }}
                               />
                             ))}
                           </div>
@@ -235,10 +240,14 @@ export function HowItWorks() {
                               <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
                                 <motion.div
                                   className="h-full bg-primary-cta rounded-full"
-                                  initial={{ width: 0 }}
-                                  whileInView={{ width: `${30 + i * 30}%` }}
-                                  viewport={{ once: true, margin: "50px", amount: 0.3 }}
-                                  transition={{ delay: 1.2 + i * 0.2, duration: 0.6 }}
+                                  animate={{ width: [`0%`, `${30 + i * 30}%`] }}
+                                  transition={{ 
+                                    duration: 1.5, 
+                                    repeat: Infinity, 
+                                    repeatDelay: 3,
+                                    delay: 1.2 + i * 0.2,
+                                    ease: "easeInOut"
+                                  }}
                                 />
                               </div>
                             </div>
@@ -319,9 +328,14 @@ export function HowItWorks() {
                               fill="none"
                               strokeLinecap="round"
                               initial={{ pathLength: 0, opacity: 0 }}
-                              whileInView={{ pathLength: 1, opacity: 1 }}
-                              viewport={{ once: true, margin: "50px", amount: 0.3 }}
-                              transition={{ delay: 1.1, duration: 0.5 }}
+                              animate={{ pathLength: [0, 1], opacity: [0, 1] }}
+                              transition={{ 
+                                duration: 1.5, 
+                                repeat: Infinity, 
+                                repeatDelay: 2,
+                                delay: 1.1,
+                                ease: "easeInOut"
+                              }}
                             />
                             {/* Checkmark */}
                             <motion.circle
@@ -342,9 +356,14 @@ export function HowItWorks() {
                               strokeLinecap="round"
                               strokeLinejoin="round"
                               initial={{ pathLength: 0 }}
-                              whileInView={{ pathLength: 1 }}
-                              viewport={{ once: true, margin: "50px", amount: 0.3 }}
-                              transition={{ delay: 1.7, duration: 0.3 }}
+                              animate={{ pathLength: [0, 1] }}
+                              transition={{ 
+                                duration: 1.5, 
+                                repeat: Infinity, 
+                                repeatDelay: 2,
+                                delay: 1.7,
+                                ease: "easeInOut"
+                              }}
                             />
                           </svg>
                         </motion.div>
