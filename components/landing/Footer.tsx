@@ -49,6 +49,14 @@ export const Footer = () => {
     }
   };
 
+  const handleSectionClick = (e: React.MouseEvent<HTMLAnchorElement>, sectionId: string) => {
+    e.preventDefault();
+    const element = document.querySelector(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+
   return (
     <section
       id="contact"
@@ -147,6 +155,7 @@ export const Footer = () => {
                 <a
                   href="#features"
                   title="View our features"
+                  onClick={(e) => handleSectionClick(e, "#features")}
                   className="flex text-base text-black transition-all duration-200 hover:text-gray-600 focus:text-gray-600 focus:outline-none focus:ring-2 focus:ring-primary-cta focus:ring-offset-2 rounded px-1"
                 >
                   Features
@@ -156,6 +165,7 @@ export const Footer = () => {
                 <a
                   href="#how-it-works"
                   title="Learn how it works"
+                  onClick={(e) => handleSectionClick(e, "#how-it-works")}
                   className="flex text-base text-black transition-all duration-200 hover:text-gray-600 focus:text-gray-600 focus:outline-none focus:ring-2 focus:ring-primary-cta focus:ring-offset-2 rounded px-1"
                 >
                   How It Works
@@ -165,6 +175,7 @@ export const Footer = () => {
                 <a
                   href="#showcase"
                   title="View showcase"
+                  onClick={(e) => handleSectionClick(e, "#showcase")}
                   className="flex text-base text-black transition-all duration-200 hover:text-gray-600 focus:text-gray-600 focus:outline-none focus:ring-2 focus:ring-primary-cta focus:ring-offset-2 rounded px-1"
                 >
                   Showcase
@@ -182,6 +193,7 @@ export const Footer = () => {
                 <a
                   href="#contact"
                   title="Get customer support"
+                  onClick={(e) => handleSectionClick(e, "#contact")}
                   className="flex text-base text-black transition-all duration-200 hover:text-gray-600 focus:text-gray-600 focus:outline-none focus:ring-2 focus:ring-primary-cta focus:ring-offset-2 rounded px-1"
                 >
                   Contact
@@ -191,6 +203,7 @@ export const Footer = () => {
                 <a
                   href="#faq"
                   title="Frequently asked questions"
+                  onClick={(e) => handleSectionClick(e, "#faq")}
                   className="flex text-base text-black transition-all duration-200 hover:text-gray-600 focus:text-gray-600 focus:outline-none focus:ring-2 focus:ring-primary-cta focus:ring-offset-2 rounded px-1"
                 >
                   FAQ
@@ -200,6 +213,7 @@ export const Footer = () => {
                 <a
                   href="#reviews"
                   title="Read testimonials"
+                  onClick={(e) => handleSectionClick(e, "#reviews")}
                   className="flex text-base text-black transition-all duration-200 hover:text-gray-600 focus:text-gray-600 focus:outline-none focus:ring-2 focus:ring-primary-cta focus:ring-offset-2 rounded px-1"
                 >
                   Testimonials
