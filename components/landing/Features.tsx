@@ -71,7 +71,8 @@ function PrototypeInfographic({ index }: { index: number }) {
             key={i}
             className="rounded border border-primary-cta/30 bg-primary-cta/10"
             initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, margin: "50px", amount: 0.3 }}
             transition={{ delay: index * 0.1 + i * 0.1 }}
           >
             <div className="p-2 space-y-0.5 h-full flex flex-col justify-center font-mono">
@@ -80,7 +81,8 @@ function PrototypeInfographic({ index }: { index: number }) {
                   key={lineIndex}
                   className="text-[8px] sm:text-[9px] text-black leading-tight"
                   initial={{ opacity: 0, x: -5 }}
-                  animate={{ opacity: 0.9, x: 0 }}
+                  whileInView={{ opacity: 0.9, x: 0 }}
+                  viewport={{ once: true, margin: "50px", amount: 0.3 }}
                   transition={{ delay: index * 0.1 + i * 0.1 + lineIndex * 0.05 }}
                 >
                   {line}
@@ -93,7 +95,8 @@ function PrototypeInfographic({ index }: { index: number }) {
       <motion.div
         className="absolute top-2 right-2 w-2 h-2 bg-primary-cta rounded-full"
         initial={{ opacity: 0, scale: 0 }}
-        animate={{ opacity: 1, scale: 1 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        viewport={{ once: true, margin: "50px", amount: 0.3 }}
         transition={{ delay: index * 0.1 + 0.4, duration: 0.3 }}
       />
     </div>
@@ -121,7 +124,8 @@ function CodeInfographic({ index }: { index: number }) {
               key={i}
               className={`text-[9px] sm:text-[10px] ${line.color} font-mono leading-tight`}
               initial={{ opacity: 0, x: -10 }}
-              animate={{ opacity: 0.9, x: 0 }}
+              whileInView={{ opacity: 0.9, x: 0 }}
+              viewport={{ once: true, margin: "50px", amount: 0.3 }}
               transition={{ delay: index * 0.1 + i * 0.15 }}
             >
               {line.text}
@@ -131,7 +135,8 @@ function CodeInfographic({ index }: { index: number }) {
         <motion.div
           className="w-1 h-2 mt-1 bg-primary-cta"
           initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true, margin: "50px", amount: 0.3 }}
           transition={{ delay: index * 0.1 + 0.6, duration: 0.3 }}
         />
       </div>
@@ -147,7 +152,8 @@ function SettingsInfographic({ index }: { index: number }) {
         <motion.div
           className="bg-white/90 backdrop-blur-sm rounded-lg p-2.5 sm:p-3 shadow-sm border border-primary-cta/20"
           initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "50px", amount: 0.3 }}
           transition={{ delay: index * 0.1, duration: 0.4 }}
         >
           <div className="space-y-2">
@@ -157,13 +163,15 @@ function SettingsInfographic({ index }: { index: number }) {
               <motion.div
                 className="w-7 h-3.5 bg-primary-cta rounded-full relative shrink-0"
                 initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true, margin: "50px", amount: 0.3 }}
                 transition={{ delay: index * 0.1 + 0.2, duration: 0.3 }}
               >
                 <motion.div
                   className="w-2.5 h-2.5 bg-white rounded-full absolute top-0.5"
                   initial={{ left: "0.125rem" }}
-                  animate={{ left: "calc(100% - 0.625rem)" }}
+                  whileInView={{ left: "calc(100% - 0.625rem)" }}
+                  viewport={{ once: true, margin: "50px", amount: 0.3 }}
                   transition={{ delay: index * 0.1 + 0.3, duration: 0.2 }}
                 />
               </motion.div>
@@ -175,7 +183,8 @@ function SettingsInfographic({ index }: { index: number }) {
                 <motion.div
                   className="h-full bg-primary-cta rounded-full"
                   initial={{ width: 0 }}
-                  animate={{ width: "75%" }}
+                  whileInView={{ width: "75%" }}
+                  viewport={{ once: true, margin: "50px", amount: 0.3 }}
                   transition={{ delay: index * 0.1 + 0.4, duration: 0.8 }}
                 />
               </div>
@@ -187,7 +196,8 @@ function SettingsInfographic({ index }: { index: number }) {
         <motion.div
           className="flex items-center gap-1.5 justify-center"
           initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true, margin: "50px", amount: 0.3 }}
           transition={{ delay: index * 0.1 + 0.6, duration: 0.3 }}
         >
           <div className="w-1.5 h-1.5 bg-primary-cta rounded-full"></div>
@@ -233,7 +243,8 @@ function AIInfographic({ index }: { index: number }) {
         viewBox="0 0 80 80"
         className="text-primary-cta"
         initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        viewport={{ once: true, margin: "50px", amount: 0.3 }}
         transition={{ delay: index * 0.1, duration: 0.5 }}
       >
         {/* Neural Network Nodes */}
@@ -255,7 +266,8 @@ function AIInfographic({ index }: { index: number }) {
             r="4"
             fill="currentColor"
             initial={{ opacity: 0, scale: 0 }}
-            animate={{ opacity: 1, scale: 1 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, margin: "50px", amount: 0.3 }}
             transition={{ delay: index * 0.1 + node.delay, duration: 0.3 }}
           />
         ))}
@@ -281,7 +293,8 @@ function AIInfographic({ index }: { index: number }) {
             strokeWidth="1.5"
             opacity="0.3"
             initial={{ pathLength: 0 }}
-            animate={{ pathLength: 1 }}
+            whileInView={{ pathLength: 1 }}
+            viewport={{ once: true, margin: "50px", amount: 0.3 }}
             transition={{ delay: index * 0.1 + 1.1 + i * 0.05, duration: 0.4 }}
           />
         ))}
@@ -293,7 +306,8 @@ function AIInfographic({ index }: { index: number }) {
           r="6"
           fill="currentColor"
           initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
+          whileInView={{ scale: 1 }}
+          viewport={{ once: true, margin: "50px", amount: 0.3 }}
           transition={{ delay: index * 0.1 + 1.5, duration: 0.3, type: "spring" }}
         />
       </motion.svg>
@@ -310,7 +324,8 @@ function TargetInfographic({ index }: { index: number }) {
         viewBox="0 0 80 80"
         className="relative z-10"
         initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        viewport={{ once: true, margin: "50px", amount: 0.3 }}
         transition={{ delay: index * 0.1, duration: 0.5 }}
       >
         {/* Outer CTA circle */}
@@ -320,7 +335,8 @@ function TargetInfographic({ index }: { index: number }) {
           r="35"
           className="fill-primary-cta opacity-30"
           initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
+          whileInView={{ scale: 1 }}
+          viewport={{ once: true, margin: "50px", amount: 0.3 }}
           transition={{ delay: index * 0.1 + 0.1, duration: 0.3 }}
         />
         {/* White ring */}
@@ -330,7 +346,8 @@ function TargetInfographic({ index }: { index: number }) {
           r="28"
           fill="white"
           initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
+          whileInView={{ scale: 1 }}
+          viewport={{ once: true, margin: "50px", amount: 0.3 }}
           transition={{ delay: index * 0.1 + 0.2, duration: 0.3 }}
         />
         {/* CTA ring */}
@@ -340,7 +357,8 @@ function TargetInfographic({ index }: { index: number }) {
           r="21"
           className="fill-primary-cta opacity-30"
           initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
+          whileInView={{ scale: 1 }}
+          viewport={{ once: true, margin: "50px", amount: 0.3 }}
           transition={{ delay: index * 0.1 + 0.3, duration: 0.3 }}
         />
         {/* White ring */}
@@ -350,7 +368,8 @@ function TargetInfographic({ index }: { index: number }) {
           r="14"
           fill="white"
           initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
+          whileInView={{ scale: 1 }}
+          viewport={{ once: true, margin: "50px", amount: 0.3 }}
           transition={{ delay: index * 0.1 + 0.4, duration: 0.3 }}
         />
         {/* Red center */}
@@ -360,7 +379,8 @@ function TargetInfographic({ index }: { index: number }) {
           r="7"
           fill="#ef4444"
           initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
+          whileInView={{ scale: 1 }}
+          viewport={{ once: true, margin: "50px", amount: 0.3 }}
           transition={{ delay: index * 0.1 + 0.5, duration: 0.3, type: "spring" }}
         />
       </motion.svg>
