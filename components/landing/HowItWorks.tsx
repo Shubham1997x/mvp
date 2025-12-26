@@ -138,11 +138,10 @@ export function HowItWorks() {
                                   strokeWidth="2"
                                   opacity="0.3"
                                   initial={{ pathLength: 0 }}
-                                  animate={{ pathLength: [0, 1] }}
+                                  whileInView={{ pathLength: 1 }}
+                                  viewport={{ once: true, margin: "50px", amount: 0.3 }}
                                   transition={{ 
                                     duration: 1.5, 
-                                    repeat: Infinity, 
-                                    repeatDelay: 3,
                                     delay: 0.6 + i * 0.05,
                                     ease: "easeInOut"
                                   }}
@@ -160,7 +159,7 @@ export function HowItWorks() {
                           transition={{ delay: 0.8, duration: 0.5 }}
                         >
                           <div className="flex items-center gap-2">
-                            <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                            <div className="w-2 h-2 bg-green-400 rounded-full"></div>
                             <span className="text-xs text-gray-600">Call Active</span>
                           </div>
                         </motion.div>
@@ -171,11 +170,11 @@ export function HowItWorks() {
                               <motion.div
                                 key={i}
                                 className="h-1 bg-gray-300 rounded"
-                                animate={{ width: [`0px`, `${60 + i * 10}px`] }}
+                                initial={{ width: 0 }}
+                                whileInView={{ width: `${60 + i * 10}px` }}
+                                viewport={{ once: true, margin: "50px", amount: 0.3 }}
                                 transition={{ 
                                   duration: 1.5, 
-                                  repeat: Infinity, 
-                                  repeatDelay: 3,
                                   delay: 1.2 + i * 0.2,
                                   ease: "easeInOut"
                                 }}
@@ -200,9 +199,9 @@ export function HowItWorks() {
                           transition={{ duration: 0.6 }}
                         >
                           <div className="flex gap-1 mb-2">
-                            <div className="w-2 h-2 rounded-full bg-red-400"></div>
-                            <div className="w-2 h-2 rounded-full bg-yellow-400"></div>
-                            <div className="w-2 h-2 rounded-full bg-green-400"></div>
+                            <div className="w-2 h-2 rounded-full bg-primary-cta"></div>
+                            <div className="w-2 h-2 rounded-full bg-primary-cta"></div>
+                            <div className="w-2 h-2 rounded-full bg-primary-cta"></div>
                           </div>
                           <div className="space-y-1">
                             {[
@@ -214,11 +213,11 @@ export function HowItWorks() {
                               <motion.div
                                 key={i}
                                 className={`h-2 ${line.color} rounded`}
-                                animate={{ width: ["0%", line.width] }}
+                                initial={{ width: "0%" }}
+                                whileInView={{ width: line.width }}
+                                viewport={{ once: true, margin: "50px", amount: 0.3 }}
                                 transition={{ 
                                   duration: 1.5, 
-                                  repeat: Infinity, 
-                                  repeatDelay: 2,
                                   delay: 0.5 + i * 0.2,
                                   ease: "easeInOut"
                                 }}
@@ -240,11 +239,11 @@ export function HowItWorks() {
                               <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
                                 <motion.div
                                   className="h-full bg-primary-cta rounded-full"
-                                  animate={{ width: [`0%`, `${30 + i * 30}%`] }}
+                                  initial={{ width: "0%" }}
+                                  whileInView={{ width: `${30 + i * 30}%` }}
+                                  viewport={{ once: true, margin: "50px", amount: 0.3 }}
                                   transition={{ 
                                     duration: 1.5, 
-                                    repeat: Infinity, 
-                                    repeatDelay: 3,
                                     delay: 1.2 + i * 0.2,
                                     ease: "easeInOut"
                                   }}
@@ -260,123 +259,97 @@ export function HowItWorks() {
                   {index === 2 && (
                     <div className="w-full h-full relative flex items-center justify-center">
                       {/* Deployment Infographic */}
-                      <div className="relative w-full h-full flex items-center justify-center">
-                        {/* Deployment Process */}
-                        <motion.div
-                          className="flex items-center justify-center relative"
-                          initial={{ opacity: 0 }}
-                          whileInView={{ opacity: 1 }}
-                          viewport={{ once: true, margin: "50px", amount: 0.3 }}
-                          transition={{ duration: 0.6 }}
-                        >
-                          <svg width="180" height="180" viewBox="0 0 200 200" className="text-primary-cta" style={{ maxWidth: "100%", height: "auto" }}>
-                            {/* Server/Cloud */}
-                            <motion.rect
-                              x="50"
-                              y="80"
-                              width="100"
-                              height="60"
-                              rx="8"
-                              fill="currentColor"
-                              opacity="0.2"
-                              initial={{ opacity: 0 }}
-                              whileInView={{ opacity: 0.2 }}
-                              viewport={{ once: true, margin: "50px", amount: 0.3 }}
-                              transition={{ delay: 0.3, duration: 0.4 }}
-                            />
-                            <motion.rect
-                              x="60"
-                              y="90"
-                              width="20"
-                              height="15"
-                              rx="2"
-                              fill="currentColor"
-                              initial={{ opacity: 0 }}
-                              whileInView={{ opacity: 1 }}
-                              viewport={{ once: true, margin: "50px", amount: 0.3 }}
-                              transition={{ delay: 0.5, duration: 0.3 }}
-                            />
-                            <motion.rect
-                              x="90"
-                              y="90"
-                              width="20"
-                              height="15"
-                              rx="2"
-                              fill="currentColor"
-                              initial={{ opacity: 0 }}
-                              whileInView={{ opacity: 1 }}
-                              viewport={{ once: true, margin: "50px", amount: 0.3 }}
-                              transition={{ delay: 0.7, duration: 0.3 }}
-                            />
-                            <motion.rect
-                              x="120"
-                              y="90"
-                              width="20"
-                              height="15"
-                              rx="2"
-                              fill="currentColor"
-                              initial={{ opacity: 0 }}
-                              whileInView={{ opacity: 1 }}
-                              viewport={{ once: true, margin: "50px", amount: 0.3 }}
-                              transition={{ delay: 0.9, duration: 0.3 }}
-                            />
-                            {/* Upload Arrow */}
-                            <motion.path
-                              d="M100 40 L100 70 M90 60 L100 70 L110 60"
-                              stroke="currentColor"
-                              strokeWidth="3"
-                              fill="none"
-                              strokeLinecap="round"
-                              initial={{ pathLength: 0, opacity: 0 }}
-                              animate={{ pathLength: [0, 1], opacity: [0, 1] }}
-                              transition={{ 
-                                duration: 1.5, 
-                                repeat: Infinity, 
-                                repeatDelay: 2,
-                                delay: 1.1,
-                                ease: "easeInOut"
-                              }}
-                            />
-                            {/* Checkmark */}
-                            <motion.circle
-                              cx="100"
-                              cy="160"
-                              r="15"
-                              fill="currentColor"
-                              initial={{ scale: 0, opacity: 0 }}
-                              whileInView={{ scale: 1, opacity: 1 }}
-                              viewport={{ once: true, margin: "50px", amount: 0.3 }}
-                              transition={{ delay: 1.5, duration: 0.3, type: "spring" }}
-                            />
-                            <motion.path
-                              d="M95 160 L98 163 L105 156"
-                              stroke="white"
-                              strokeWidth="2"
-                              fill="none"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              initial={{ pathLength: 0 }}
-                              animate={{ pathLength: [0, 1] }}
-                              transition={{ 
-                                duration: 1.5, 
-                                repeat: Infinity, 
-                                repeatDelay: 2,
-                                delay: 1.7,
-                                ease: "easeInOut"
-                              }}
-                            />
-                          </svg>
-                        </motion.div>
-                        {/* Success Badge */}
-                        <motion.div
-                          className="absolute top-2 right-2 bg-green-500 text-white rounded-full px-3 py-1 text-xs font-semibold"
-                          initial={{ opacity: 0, scale: 0 }}
-                          whileInView={{ opacity: 1, scale: 1 }}
-                          viewport={{ once: true, margin: "50px", amount: 0.3 }}
-                          transition={{ delay: 1.8, duration: 0.3, type: "spring" }}
-                        >
-                          Live
-                        </motion.div>
+                      <div className="relative w-full h-full flex items-center justify-center p-6">
+                        <div className="relative w-full max-w-[200px]">
+                          {/* Cloud/Server Container */}
+                          <motion.div
+                            className="relative bg-white/80 backdrop-blur-sm rounded-xl shadow-lg border-2 border-primary-cta/20 p-6 mb-4"
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, margin: "50px", amount: 0.3 }}
+                            transition={{ duration: 0.5 }}
+                          >
+                            {/* Server Blocks */}
+                            <div className="grid grid-cols-3 gap-2 mb-3">
+                              {[...Array(3)].map((_, i) => (
+                                <motion.div
+                                  key={i}
+                                  className="h-8 bg-primary-cta/20 rounded"
+                                  initial={{ opacity: 0, scale: 0.8 }}
+                                  whileInView={{ opacity: 1, scale: 1 }}
+                                  viewport={{ once: true, margin: "50px", amount: 0.3 }}
+                                  transition={{ delay: 0.3 + i * 0.1, duration: 0.3 }}
+                                />
+                              ))}
+                            </div>
+                            {/* Status Indicator */}
+                            <div className="flex items-center gap-2">
+                              <motion.div
+                                className="w-2 h-2 bg-primary-cta rounded-full"
+                                initial={{ scale: 0 }}
+                                whileInView={{ scale: 1 }}
+                                viewport={{ once: true, margin: "50px", amount: 0.3 }}
+                                transition={{ delay: 0.6, duration: 0.3, type: "spring" }}
+                              />
+                              <span className="text-xs font-medium text-gray-700">Deployed</span>
+                            </div>
+                          </motion.div>
+
+                          {/* Upload Arrow */}
+                          <motion.div
+                            className="flex justify-center mb-4"
+                            initial={{ opacity: 0 }}
+                            whileInView={{ opacity: 1 }}
+                            viewport={{ once: true, margin: "50px", amount: 0.3 }}
+                            transition={{ delay: 0.7, duration: 0.4 }}
+                          >
+                            <svg width="40" height="40" viewBox="0 0 40 40" className="text-primary-cta">
+                              <motion.path
+                                d="M20 5 L20 25 M12 17 L20 25 L28 17"
+                                stroke="currentColor"
+                                strokeWidth="2.5"
+                                fill="none"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                initial={{ pathLength: 0, opacity: 0 }}
+                                whileInView={{ pathLength: 1, opacity: 1 }}
+                                viewport={{ once: true, margin: "50px", amount: 0.3 }}
+                                transition={{ duration: 0.8, delay: 0.8 }}
+                              />
+                            </svg>
+                          </motion.div>
+
+                          {/* Success Badge */}
+                          <motion.div
+                            className="bg-primary-cta hover:bg-primary-cta-hover text-white rounded-lg px-4 py-2 text-center shadow-md"
+                            initial={{ opacity: 0, scale: 0.8 }}
+                            whileInView={{ opacity: 1, scale: 1 }}
+                            viewport={{ once: true, margin: "50px", amount: 0.3 }}
+                            transition={{ delay: 1, duration: 0.4, type: "spring" }}
+                          >
+                            <div className="flex items-center justify-center gap-2">
+                              <motion.svg
+                                width="16"
+                                height="16"
+                                viewBox="0 0 16 16"
+                                initial={{ pathLength: 0 }}
+                                whileInView={{ pathLength: 1 }}
+                                viewport={{ once: true, margin: "50px", amount: 0.3 }}
+                                transition={{ delay: 1.1, duration: 0.5 }}
+                              >
+                                <motion.path
+                                  d="M3 8 L6 11 L13 4"
+                                  stroke="white"
+                                  strokeWidth="2"
+                                  fill="none"
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                />
+                              </motion.svg>
+                              <span className="text-sm font-semibold">Live</span>
+                            </div>
+                          </motion.div>
+                        </div>
                       </div>
                     </div>
                   )}

@@ -95,9 +95,9 @@ function CodeInfographic({ index }: { index: number }) {
     <div className="w-full h-full relative font-mono text-xs">
       <div className="w-full h-full p-3 overflow-hidden flex flex-col bg-primary-cta/10 rounded-lg">
         <div className="flex gap-1 mb-2">
-          <div className="w-2 h-2 rounded-full bg-red-400"></div>
-          <div className="w-2 h-2 rounded-full bg-yellow-400"></div>
-          <div className="w-2 h-2 rounded-full bg-green-400"></div>
+          <div className="w-2 h-2 rounded-full bg-white"></div>
+          <div className="w-2 h-2 rounded-full bg-white"></div>
+          <div className="w-2 h-2 rounded-full bg-white"></div>
         </div>
         <div className="space-y-1 flex-1 flex flex-col justify-center">
           {lines.map((line, i) => (
@@ -214,17 +214,26 @@ function ChartInfographic({ index }: { index: number }) {
 function AIInfographic({ index }: { index: number }) {
   return (
     <div className="w-full h-full relative flex items-center justify-center bg-primary-cta/10 rounded-lg">
-      <div className="relative">
-        <div className="absolute inset-0 w-20 h-20 bg-primary-cta/10 rounded-full -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2"></div>
-        {[...Array(3)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute inset-0 border-2 border-primary-cta/40 rounded-full"
-            style={{ width: `${36 + i * 18}px`, height: `${36 + i * 18}px`, left: `${-18 - i * 9}px`, top: `${-18 - i * 9}px` }}
-            animate={{ opacity: [0.6, 0.8, 0.6] }}
-            transition={{ duration: 2, repeat: Infinity, delay: i * 0.3 }}
-          />
-        ))}
+      <div className="relative w-20 h-20 flex items-center justify-center">
+        {[...Array(3)].map((_, i) => {
+          const size = 36 + i * 18;
+          const offset = size / 2;
+          return (
+            <motion.div
+              key={i}
+              className="absolute border-2 border-primary-cta/40 rounded-full"
+              style={{ 
+                width: `${size}px`, 
+                height: `${size}px`, 
+                left: `50%`,
+                top: `50%`,
+                transform: `translate(-50%, -50%)`
+              }}
+              animate={{ opacity: [0.6, 0.8, 0.6] }}
+              transition={{ duration: 2, repeat: Infinity, delay: i * 0.3 }}
+            />
+          );
+        })}
         <motion.div
           className="w-7 h-7 bg-primary-cta rounded-lg flex items-center justify-center relative z-10"
           animate={{ rotate: [0, 360] }}
