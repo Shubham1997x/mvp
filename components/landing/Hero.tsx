@@ -39,13 +39,13 @@ const PHASES = [
 ];
 
 const CODE_LINES = [
-  { text: "<div>", color: "text-blue-300" },
-  { text: "<h1>Welcome to MVP</h1>", color: "text-cyan-300" },
+  { text: "<div>", color: "text-white" },
+  { text: "<h1>Welcome to MVP</h1>", color: "text-white" },
   {
     text: "<p>Fast, reliable, and scalable</p>",
-    color: "text-cyan-300",
+    color: "text-white",
   },
-  { text: "</div>", color: "text-cyan-200" },
+  { text: "</div>", color: "text-white" },
 ];
 
 const CODE_LINES_RIGHT = CODE_LINES;
@@ -188,10 +188,19 @@ function RocketAnimation({
 }
 
 function WireframeAnimation({ index }: { index: number }) {
+  const wireframeItems = [
+    { label: "Header", lines: ["Nav", "Logo"] },
+    { label: "Sidebar", lines: ["Menu", "Links"] },
+    { label: "Content", lines: ["Main", "Area"] },
+    { label: "Card", lines: ["Title", "Text"] },
+    { label: "Form", lines: ["Input", "Button"] },
+    { label: "Footer", lines: ["Links", "Info"] },
+  ];
+
   return (
     <div className="w-full h-full relative">
       <div className="grid grid-cols-3 gap-2 h-full p-2">
-        {[...Array(6)].map((_, i) => (
+        {wireframeItems.map((item, i) => (
           <motion.div
             key={i}
             className="bg-white/20 backdrop-blur-sm rounded border border-white/40"
@@ -203,10 +212,18 @@ function WireframeAnimation({ index }: { index: number }) {
               backgroundColor: "rgba(255,255,255,0.3)",
             }}
           >
-            <div className="p-1.5 space-y-0.5">
-              <div className="h-1 bg-white/60 rounded w-3/4"></div>
-              <div className="h-0.5 bg-white/40 rounded w-full"></div>
-              <div className="h-0.5 bg-white/40 rounded w-2/3"></div>
+            <div className="p-1.5 space-y-0.5 h-full flex flex-col justify-center">
+              <div className="text-[7px] sm:text-[8px] text-white/90 font-semibold mb-0.5">
+                {item.label}
+              </div>
+              {item.lines.map((line, lineIndex) => (
+                <div
+                  key={lineIndex}
+                  className="text-[6px] sm:text-[7px] text-white/60"
+                >
+                  {line}
+                </div>
+              ))}
             </div>
           </motion.div>
         ))}

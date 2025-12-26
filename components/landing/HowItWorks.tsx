@@ -164,21 +164,27 @@ export function HowItWorks() {
                           </div>
                         </motion.div>
                         {/* Notes Animation */}
-                        <div className="absolute top-4 right-4 bg-white rounded-lg shadow-md p-2 w-[100px]">
+                        <div className="absolute top-4 right-4 bg-white rounded-lg shadow-md p-2 w-[120px]">
                           <div className="space-y-1">
-                            {[...Array(3)].map((_, i) => (
+                            {[
+                              { text: "Requirements", delay: 1.2 },
+                              { text: "Features", delay: 1.4 },
+                              { text: "Notes...", delay: 1.6 },
+                            ].map((item, i) => (
                               <motion.div
                                 key={i}
-                                className="h-1 bg-gray-300 rounded"
-                                initial={{ width: 0 }}
-                                whileInView={{ width: `${60 + i * 10}px` }}
+                                className="text-[8px] sm:text-[9px] text-gray-700 font-medium"
+                                initial={{ opacity: 0, x: 5 }}
+                                whileInView={{ opacity: 1, x: 0 }}
                                 viewport={{ once: true, margin: "50px", amount: 0.3 }}
                                 transition={{ 
-                                  duration: 1.5, 
-                                  delay: 1.2 + i * 0.2,
+                                  duration: 0.5, 
+                                  delay: item.delay,
                                   ease: "easeInOut"
                                 }}
-                              />
+                              >
+                                {item.text}
+                              </motion.div>
                             ))}
                           </div>
                         </div>
@@ -205,23 +211,24 @@ export function HowItWorks() {
                           </div>
                           <div className="space-y-1">
                             {[
-                              { width: "60%", color: "bg-purple-400" },
-                              { width: "80%", color: "bg-pink-400" },
-                              { width: "45%", color: "bg-blue-400" },
-                              { width: "70%", color: "bg-purple-300" },
+                              { text: "const api = fetch()", color: "text-gray-700" },
+                              { text: "  .then(res => res.json())", color: "text-gray-600" },
+                              { text: "  .catch(err => log(err))", color: "text-gray-600" },
                             ].map((line, i) => (
                               <motion.div
                                 key={i}
-                                className={`h-2 ${line.color} rounded`}
-                                initial={{ width: "0%" }}
-                                whileInView={{ width: line.width }}
+                                className={`text-[9px] sm:text-[10px] ${line.color} font-mono leading-tight`}
+                                initial={{ opacity: 0, x: -10 }}
+                                whileInView={{ opacity: 1, x: 0 }}
                                 viewport={{ once: true, margin: "50px", amount: 0.3 }}
                                 transition={{ 
-                                  duration: 1.5, 
-                                  delay: 0.5 + i * 0.2,
+                                  duration: 0.5, 
+                                  delay: 0.5 + i * 0.15,
                                   ease: "easeInOut"
                                 }}
-                              />
+                              >
+                                {line.text}
+                              </motion.div>
                             ))}
                           </div>
                         </motion.div>
@@ -271,15 +278,19 @@ export function HowItWorks() {
                           >
                             {/* Server Blocks */}
                             <div className="grid grid-cols-3 gap-2 mb-3">
-                              {[...Array(3)].map((_, i) => (
+                              {["API", "DB", "CDN"].map((label, i) => (
                                 <motion.div
                                   key={i}
-                                  className="h-8 bg-primary-cta/20 rounded"
+                                  className="h-8 bg-primary-cta/20 rounded flex items-center justify-center"
                                   initial={{ opacity: 0, scale: 0.8 }}
                                   whileInView={{ opacity: 1, scale: 1 }}
                                   viewport={{ once: true, margin: "50px", amount: 0.3 }}
                                   transition={{ delay: 0.3 + i * 0.1, duration: 0.3 }}
-                                />
+                                >
+                                  <span className="text-[8px] sm:text-[9px] font-semibold text-primary-cta">
+                                    {label}
+                                  </span>
+                                </motion.div>
                               ))}
                             </div>
                             {/* Status Indicator */}
