@@ -387,7 +387,7 @@ export function Hero() {
   }, []);
 
   return (
-    <section className="relative min-h-screen lg:h-screen flex items-center overflow-hidden bg-white py-8 sm:py-12 md:py-16 lg:py-0">
+    <section className="relative min-h-screen lg:h-screen flex items-center overflow-hidden bg-white pt-20 pb-8 sm:pt-24 sm:pb-12 md:pt-28 md:pb-16 lg:py-0">
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
@@ -412,7 +412,7 @@ export function Hero() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-6 relative z-10 backdrop-blur-sm rounded-lg w-full lg:h-full lg:flex lg:items-center">
         <div className="max-w-7xl mx-auto relative z-10 w-full">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 xl:gap-16 items-center mb-6 sm:mb-8 md:mb-12 lg:mb-0">
-            <div className="text-left">
+            <div className="text-left relative z-10">
               <motion.h1
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -487,29 +487,16 @@ export function Hero() {
                       animate={{ width: "100%" }}
                       transition={{ duration: 1, delay: index * 0.15 + 0.3 }}
                     />
-                    {isLeft ? (
-                      <>
-                        <InfographicSection
-                          item={item}
-                          index={index}
-                          stars={starPositions}
-                        />
-                        <PhaseContent item={item} index={index} isLeft={true} />
-                      </>
-                    ) : (
-                      <>
-                        <PhaseContent
-                          item={item}
-                          index={index}
-                          isLeft={false}
-                        />
-                        <InfographicSection
-                          item={item}
-                          index={index}
-                          stars={starPositions}
-                        />
-                      </>
-                    )}
+                    <div className={`order-1 ${isLeft ? "md:order-1" : "md:order-2"}`}>
+                      <InfographicSection
+                        item={item}
+                        index={index}
+                        stars={starPositions}
+                      />
+                    </div>
+                    <div className={`order-2 ${isLeft ? "md:order-2" : "md:order-1"}`}>
+                      <PhaseContent item={item} index={index} isLeft={isLeft} />
+                    </div>
                   </motion.div>
                 );
               })}

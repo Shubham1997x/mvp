@@ -22,10 +22,10 @@ export function HowItWorks() {
   ];
 
   return (
-    <section id="how-it-works" className="py-24 bg-white">
-      <div className="container mx-auto px-6">
+    <section id="how-it-works" className="py-12 sm:py-16 md:py-24 bg-white">
+      <div className="container mx-auto px-4 sm:px-6">
         <motion.div
-          className="text-center max-w-3xl mx-auto mb-16"
+          className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 md:mb-16"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "100px", amount: 0.3 }}
@@ -60,7 +60,7 @@ export function HowItWorks() {
           </motion.p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto items-stretch">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 max-w-6xl mx-auto items-stretch">
           {steps.map((step, index) => (
             <motion.div
               key={`step-${index}`}
@@ -76,7 +76,7 @@ export function HowItWorks() {
                 className="relative bg-white rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300 border border-gray-100 overflow-hidden flex flex-col h-full w-full"
               >
                 {/* Infographic Section - 70% (Top) */}
-                <div className="relative bg-linear-to-br from-gray-50 to-gray-100 flex items-center justify-center p-8 h-[350px] w-full">
+                <div className="relative bg-linear-to-br from-gray-50 to-gray-100 flex items-center justify-center p-4 sm:p-6 md:p-8 h-[250px] sm:h-[300px] md:h-[350px] w-full">
                   {index === 0 && (
                     <div className="w-full h-full relative flex items-center justify-center">
                       {/* AI Discovery Infographic */}
@@ -367,7 +367,7 @@ export function HowItWorks() {
                 </div>
 
                 {/* Text Section - 30% (Bottom) */}
-                <div className="p-6 flex flex-col justify-center w-full min-h-[150px]">
+                <div className="p-4 sm:p-5 md:p-6 flex flex-col justify-center w-full min-h-[120px] sm:min-h-[140px] md:min-h-[150px]">
                   <div className="text-4xl lg:text-5xl text-primary-cta/20 font-bold mb-2">
                     {index + 1}
                   </div>
@@ -389,7 +389,7 @@ export function HowItWorks() {
         </div>
 
         <motion.div
-          className="text-center mt-16"
+          className="text-center mt-10 sm:mt-12 md:mt-16"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "100px", amount: 0.3 }}
