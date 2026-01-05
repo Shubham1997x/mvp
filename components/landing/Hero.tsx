@@ -242,39 +242,33 @@ function CodeEditorAnimation({
   const lines = isRight ? CODE_LINES_RIGHT : CODE_LINES;
   return (
     <div
-      className={`w-full h-full relative font-mono ${
-        isRight ? "text-xs" : "text-xs"
-      }`}
+      className={`w-full h-full relative font-mono ${isRight ? "text-xs" : "text-xs"
+        }`}
     >
       <div
-        className={`bg-white/10 backdrop-blur-sm rounded-lg h-full ${
-          isRight ? "p-3" : "p-2"
-        } overflow-hidden`}
+        className={`bg-white/10 backdrop-blur-sm rounded-lg h-full ${isRight ? "p-3" : "p-2"
+          } overflow-hidden`}
       >
         <div className={`flex ${isRight ? "gap-1.5 mb-3" : "gap-1 mb-2"}`}>
           <div
-            className={`${
-              isRight ? "w-2.5 h-2.5" : "w-2 h-2"
-            } rounded-full bg-white`}
+            className={`${isRight ? "w-2.5 h-2.5" : "w-2 h-2"
+              } rounded-full bg-white`}
           ></div>
           <div
-            className={`${
-              isRight ? "w-2.5 h-2.5" : "w-2 h-2"
-            } rounded-full bg-white`}
+            className={`${isRight ? "w-2.5 h-2.5" : "w-2 h-2"
+              } rounded-full bg-white`}
           ></div>
           <div
-            className={`${
-              isRight ? "w-2.5 h-2.5" : "w-2 h-2"
-            } rounded-full bg-white`}
+            className={`${isRight ? "w-2.5 h-2.5" : "w-2 h-2"
+              } rounded-full bg-white`}
           ></div>
         </div>
         <div className={isRight ? "space-y-1.5" : "space-y-1"}>
           {lines.map((line, i) => (
             <motion.div
               key={i}
-              className={`${isRight ? "text-[10px]" : "text-[9px]"} ${
-                line.color
-              } font-mono leading-tight`}
+              className={`${isRight ? "text-[10px]" : "text-[9px]"} ${line.color
+                } font-mono leading-tight`}
               initial={{ opacity: 0, x: -10 }}
               animate={{ opacity: 0.9, x: 0 }}
               transition={{ delay: index * 0.15 + 0.5 + i * 0.1 }}
@@ -284,9 +278,8 @@ function CodeEditorAnimation({
           ))}
         </div>
         <motion.div
-          className={`${
-            isRight ? "w-1.5 h-3 mt-1" : "w-1 h-2 mt-0.5"
-          } bg-white`}
+          className={`${isRight ? "w-1.5 h-3 mt-1" : "w-1 h-2 mt-0.5"
+            } bg-white`}
           animate={{ opacity: [1, 0, 1] }}
           transition={{ duration: 1, repeat: Infinity }}
         />
@@ -306,9 +299,8 @@ function PhaseContent({
 }) {
   return (
     <div
-      className={`flex flex-col justify-center px-4 py-3 ${
-        isLeft ? "rounded-r-lg" : "rounded-l-lg"
-      } relative z-10`}
+      className={`flex flex-col justify-center px-4 py-3 ${isLeft ? "rounded-r-lg" : "rounded-l-lg"
+        } relative z-10`}
     >
       <motion.div
         className="text-[10px] font-semibold text-gray-400 uppercase tracking-wide mb-1"
@@ -477,9 +469,8 @@ export function Hero() {
                       y: -3,
                       transition: { duration: 0.2 },
                     }}
-                    className={`group relative grid grid-cols-1 gap-0 items-center rounded-lg shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden bg-white border border-gray-100 max-w-lg md:grid-cols-[1fr_1fr] ${
-                      index === 1 ? "md:translate-x-[10%]" : ""
-                    }`}
+                    className={`group relative grid grid-cols-1 gap-0 items-center rounded-lg shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden bg-white border border-gray-100 max-w-lg md:grid-cols-[1fr_1fr] ${index === 1 ? "md:translate-x-[10%]" : ""
+                      }`}
                   >
                     <motion.div
                       className="absolute top-0 left-0 h-1"
@@ -550,7 +541,7 @@ export function Hero() {
           delay: 1,
         }}
         onClick={() => {
-          const nextSection = document.querySelector("#showcase");
+          const nextSection = document.querySelector("#how-it-works");
           if (nextSection) nextSection.scrollIntoView({ behavior: "smooth" });
         }}
         aria-label="Scroll to next section"

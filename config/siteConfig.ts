@@ -12,8 +12,9 @@ export const siteConfig = {
 
   // Navigation Links
   navigationLinks: [
-    { label: "Showcase", href: "#showcase" },
+
     { label: "Process", href: "#how-it-works" },
+    { label: "Showcase", href: "#showcase" },
     { label: "Features", href: "#features" },
     { label: "Why Us", href: "#why-us" },
     { label: "Stats", href: "#stats" },
